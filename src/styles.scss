@@ -1,0 +1,96 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import 'scss/variables';
+
+/* fonts-icon */
+@import 'scss/fonts/fontawesome/scss/fontawesome';
+@import 'scss/fonts/feather/iconfont';
+
+@import 'scss/general';
+@import 'scss/generic';
+@import 'scss/mixins/function';
+
+/* important element */
+@import 'scss/menu/pc-footer.scss';
+@import 'scss/menu/menu-lite';
+
+/* basic elements */
+@import 'scss/theme-elements/theme-elements';
+
+/* third party modules style*/
+@import 'scss/plugins/plugins';
+
+@import 'scss/custom';
+// Override z-index cho toàn bộ overlay
+.cdk-overlay-container {
+  z-index: 9999 !important;
+}
+
+// Override từng dialog cụ thể nếu cần
+.cdk-overlay-pane {
+  z-index: 10000 !important;
+  position: fixed !important; // Quan trọng để z-index hoạt động đúng
+}
+ .mat-mdc-card-header {
+  // background: #f1f1f1;
+  font-size: 20px;
+  // padding: 16px 24px;
+  font-weight: bold;
+  margin-bottom: 2px;
+}
+
+
+::ng-deep .mat-mdc-dialog-container .mat-mdc-dialog-surface .mat-mdc-dialog-inner-container {
+   width: auto !important;
+    min-width: none !important;
+  max-width: unset !important;
+  height: auto !important;
+  max-height: unset !important;
+}
+
+.table > tbody {
+  vertical-align: middle !important; /* hoặc unset */
+}
+
+
+
+
+
+.cdk-overlay-pane.mat-mdc-dialog-panel {
+  max-width: none !important;
+}
+.mat-form-field input.mat-input-element {
+  background-color: #f8f9fa !important;
+}
+.mat-datepicker-content {
+  background-color: #f8f9fa !important;
+}
+.mat-select-panel {
+  background-color: #f8f9fa !important; /* bg-light */
+}
+.cdk-overlay-pane{
+      background-color: #f8f9fa !important; /* bg-light */
+
+}
+th.mat-mdc-header-cell {
+  font-weight: bold !important;
+}
+.mat-mdc-header-cell{
+  font-weight: bold !important;
+}
+
+
+  // .mat-mdc-table .mat-mdc-header-cell {
+  //   border: 1px solid #dee2e6 !important;
+  //   background-color: #eff0f1 !important;
+  //   font-weight: 900 !important;
+  //   font-size: 15px !important;
+  //   color: #495057 !important;
+  //   height: 40px !important;
+  // }
+
+ 
+mat-error {
+  color: red !important;
+  font-weight: 500;
+}

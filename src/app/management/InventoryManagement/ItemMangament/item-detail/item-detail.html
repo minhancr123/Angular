@@ -1,0 +1,212 @@
+<div class="item-detail-dialog">
+  <div mat-dialog-title class="d-flex justify-content-between align-items-center">
+    <h2>Chi tiết mặt hàng</h2>
+    <button mat-icon-button (click)="onClose()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <div mat-dialog-content class="dialog-content">
+    <mat-tab-group>
+      <!-- Tab Thông tin cơ bản -->
+      <mat-tab label="Thông tin cơ bản">
+        <div class="tab-content p-3">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="info-group mb-3">
+                <label class="info-label">Mã hàng:</label>
+                <span class="info-value">{{ item.MaHang }}</span>
+              </div>
+              <div class="info-group mb-3">
+                <label class="info-label">Tên mặt hàng:</label>
+                <span class="info-value">{{ item.TenMatHang }}</span>
+              </div>
+              <div class="info-group mb-3">
+                <label class="info-label">Mô tả:</label>
+                <span class="info-value">{{ item.MoTa || 'Không có' }}</span>
+              </div>
+              <div class="info-group mb-3">
+                <label class="info-label">Chi tiết mô tả:</label>
+                <span class="info-value">{{ item.ChiTietMoTa || 'Không có' }}</span>
+              </div>
+              <div class="info-group mb-3">
+                <label class="info-label">Tên OnSite:</label>
+                <span class="info-value">{{ item.TenOnSite || 'Không có' }}</span>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="info-group mb-3">
+                <label class="info-label">Giá mua:</label>
+                <span class="info-value text-success">{{ item.GiaMua | currency:'VND':'symbol':'1.0-0' }}</span>
+              </div>
+              <div class="info-group mb-3">
+                <label class="info-label">Giá bán:</label>
+                <span class="info-value text-primary">{{ item.GiaBan | currency:'VND':'symbol':'1.0-0' }}</span>
+              </div>
+              <div class="info-group mb-3">
+                <label class="info-label">VAT:</label>
+                <span class="info-value">{{ item.Vat }}%</span>
+              </div>
+              <div class="info-group mb-3">
+                <label class="info-label">Barcode:</label>
+                <span class="info-value">{{ item.Barcode || 'Không có' }}</span>
+              </div>
+              <div class="info-group mb-3">
+                <label class="info-label">Trạng thái:</label>
+                <span class="info-value">
+                  <span class="badge" [class]="item.NgungKinhDoanh ? 'badge-danger' : 'badge-success'">
+                    {{ item.NgungKinhDoanh ? 'Ngừng kinh doanh' : 'Đang kinh doanh' }}
+                  </span>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-tab>
+
+      <!-- Tab Thông tin kỹ thuật -->
+      <mat-tab label="Thông tin kỹ thuật">
+        <div class="tab-content p-3">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="info-group mb-3">
+                <label class="info-label">Quy đổi ĐVT cấp 2:</label>
+                <span class="info-value">{{ item.QuyDoiDVTCap2 || 0 }}</span>
+              </div>
+              <div class="info-group mb-3">
+                <label class="info-label">Quy đổi ĐVT cấp 3:</label>
+                <span class="info-value">{{ item.QuyDoiDVTCap3 || 0 }}</span>
+              </div>
+              <div class="info-group mb-3">
+                <label class="info-label">Kích thước:</label>
+                <span class="info-value">{{ item.KichThuoc || 'Không có' }}</span>
+              </div>
+              <div class="info-group mb-3">
+                <label class="info-label">Thông số:</label>
+                <span class="info-value">{{ item.ThongSo || 'Không có' }}</span>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="info-group mb-3">
+                <label class="info-label">Tồn tối thiểu:</label>
+                <span class="info-value">{{ item.LowerLimit || 0 }}</span>
+              </div>
+              <div class="info-group mb-3">
+                <label class="info-label">Tồn tối đa:</label>
+                <span class="info-value">{{ item.UpperLimit || 0 }}</span>
+              </div>
+              <div class="info-group mb-3">
+                <label class="info-label">Theo dõi tồn kho:</label>
+                <span class="info-value">
+                  <mat-icon class="text-success" *ngIf="item.TheoDoiTonKho">check_circle</mat-icon>
+                  <mat-icon class="text-danger" *ngIf="!item.TheoDoiTonKho">cancel</mat-icon>
+                  {{ item.TheoDoiTonKho ? 'Có' : 'Không' }}
+                </span>
+              </div>
+              <div class="info-group mb-3">
+                <label class="info-label">Theo dõi lô:</label>
+                <span class="info-value">
+                  <mat-icon class="text-success" *ngIf="item.TheoDoiLo">check_circle</mat-icon>
+                  <mat-icon class="text-danger" *ngIf="!item.TheoDoiLo">cancel</mat-icon>
+                  {{ item.TheoDoiLo ? 'Có' : 'Không' }}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-tab>
+
+      <!-- Tab Tài sản -->
+      <mat-tab label="Thông tin tài sản">
+        <div class="tab-content p-3">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="info-group mb-3">
+                <label class="info-label">Là tài sản:</label>
+                <span class="info-value">
+                  <mat-icon class="text-success" *ngIf="item.IsTaiSan">check_circle</mat-icon>
+                  <mat-icon class="text-danger" *ngIf="!item.IsTaiSan">cancel</mat-icon>
+                  {{ item.IsTaiSan ? 'Có' : 'Không' }}
+                </span>
+              </div>
+              <div class="info-group mb-3">
+                <label class="info-label">Số kỳ khấu hao tối thiểu:</label>
+                <span class="info-value">{{ item.SoKyTinhKhauHaoToiThieu || 0 }}</span>
+              </div>
+              <div class="info-group mb-3">
+                <label class="info-label">Số kỳ khấu hao tối đa:</label>
+                <span class="info-value">{{ item.SoKyTinhKhauHaoToiDa || 0 }}</span>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="info-group mb-3">
+                <label class="info-label">Số năm đề nghị:</label>
+                <span class="info-value">{{ item.SoNamDeNghi || 'Không có' }}</span>
+              </div>
+              <div class="info-group mb-3">
+                <label class="info-label">Tỉ lệ hao mòn:</label>
+                <span class="info-value">{{ item.TiLeHaoMon || 'Không có' }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-tab>
+
+      <!-- Tab Hình ảnh -->
+      <mat-tab label="Hình ảnh">
+        <div class="tab-content p-3">
+          <div class="image-section">
+            <h6 class="mb-3">Hình ảnh chính</h6>
+            <div *ngIf="item.HinhAnh" class="image-container">
+              <img [src]="item.HinhAnh" [alt]="item.TenMatHang" class="product-image" />
+              <div class="image-info mt-2">
+                <small class="text-muted">{{ item.TenMatHang }}</small>
+              </div>
+            </div>
+            <div *ngIf="!item.HinhAnh" class="no-image">
+              <div class="no-image-placeholder">
+                <mat-icon class="large-icon">image_not_supported</mat-icon>
+                <p class="text-muted">Chưa có hình ảnh</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-tab>
+
+      <!-- Tab Thông tin hệ thống -->
+      <mat-tab label="Thông tin hệ thống">
+        <div class="tab-content p-3">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="info-group mb-3">
+                <label class="info-label">Ngày tạo:</label>
+                <span class="info-value">{{ item.CreatedDate | date:'dd/MM/yyyy HH:mm' }}</span>
+              </div>
+              <div class="info-group mb-3">
+                <label class="info-label">Người tạo:</label>
+                <span class="info-value">{{ item.CreatedBy || 'Không xác định' }}</span>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="info-group mb-3">
+                <label class="info-label">Ngày sửa đổi:</label>
+                <span class="info-value">{{ item.ModifiedDate ? (item.ModifiedDate | date:'dd/MM/yyyy HH:mm') : 'Chưa sửa đổi' }}</span>
+              </div>
+              <div class="info-group mb-3">
+                <label class="info-label">Người sửa đổi:</label>
+                <span class="info-value">{{ item.ModifiedBy || 'Chưa có' }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+
+  <div mat-dialog-actions class="dialog-actions">
+    <button mat-raised-button color="primary" (click)="onClose()">
+      <mat-icon>close</mat-icon>
+      Đóng
+    </button>
+  </div>
+</div>

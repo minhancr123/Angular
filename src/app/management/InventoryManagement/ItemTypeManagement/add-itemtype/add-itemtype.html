@@ -1,0 +1,57 @@
+<h2 class="mb-4">THÊM MỚI LOẠI MẶT HÀNG</h2>
+
+<form [formGroup]="form" novalidate>
+  <div class="row mb-3">
+    <div class="col-md-6">
+      <mat-form-field appearance="outline" class="w-100 bg-light rounded px-2">
+        <mat-label>Tên loại mặt hàng*</mat-label>
+        <input matInput formControlName="tenLoai" required />
+        <mat-error *ngIf="form.get('tenLoai')?.hasError('required')">Không được để trống</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="col-md-6">
+      <mat-form-field appearance="outline" class="w-100 bg-light rounded px-2">
+        <mat-label>Loại mặt hàng cha</mat-label>
+        <mat-select formControlName="loaiChaId">
+          <mat-option *ngFor="let loai of loaiChaList" [value]="loai.IdLMH">
+            {{ loai.TenLMH }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <div class="col-md-6">
+      <mat-form-field appearance="outline" class="w-100 bg-light rounded px-2">
+        <mat-label>Mô tả</mat-label>
+        <input matInput formControlName="moTa" />
+      </mat-form-field>
+    </div>
+    <div class="col-md-6">
+      <mat-form-field appearance="outline" class="w-100 bg-light rounded px-2">
+        <mat-label>Độ ưu tiên</mat-label>
+        <input type="number" matInput formControlName="doUuTien" />
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="row mb-4">
+    <div class="col-md-6">
+      <mat-form-field appearance="outline" class="w-100 bg-light rounded px-2">
+        <mat-label>Kho mặc định</mat-label>
+        <mat-select formControlName="khoMacDinhId">
+          <mat-option *ngFor="let kho of khoList" [value]="kho.id">
+            {{ kho.tenKho }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-end gap-2">
+    <button mat-stroked-button color="warn" (click)="Back()">Trở lại</button>
+    <button mat-stroked-button color="accent" (click)="resetForm()">Đặt lại</button>
+    <button mat-flat-button color="primary" (click)="submit()" [disabled]="form.invalid">Lưu</button>
+  </div>
+</form>

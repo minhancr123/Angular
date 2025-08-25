@@ -1,0 +1,149 @@
+/* === Modal tổng thể === */
+.modal-content {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 16px;
+  max-width: 100%;
+  overflow-x: hidden;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  box-sizing: border-box;
+}
+
+/* === Header modal === */
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  border-bottom: 1px solid #e0e0e0;
+  padding-bottom: 8px;
+  margin-bottom: 12px;
+}
+
+.dialog-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+/* === Nút button === */
+.ja_btn-addnew,
+.ja_btn-goback {
+  text-transform: uppercase;
+  min-width: 90px;
+  margin-left: 8px;
+  font-weight: 500;
+}
+
+/* === Modal body === */
+.modal-body {
+  padding: 0 4px;
+  max-height: 70vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  position: relative;
+  box-sizing: border-box;
+}
+
+/* === Overlay loading === */
+.overlay-layer {
+  position: absolute;
+  z-index: 999;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.6);
+}
+
+/* === Spinner đẹp hơn === */
+.spinner-success {
+  border-color: #28a745;
+}
+
+/* === Form fields === */
+mat-form-field {
+  width: 100%;
+}
+
+.input-batbuoc,
+.input-thuong {
+  font-size: 14px;
+}
+
+.form-group.row {
+  margin-bottom: 12px;
+}
+
+/* === Checkbox và dòng app === */
+mat-checkbox {
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+/* === Table === */
+.table-responsive {
+  overflow-x: auto;
+}
+
+table.mat-table {
+  width: 100%;
+  border-collapse: collapse;
+  box-sizing: border-box;
+}
+
+table th,
+table td {
+  padding: 12px 8px;
+  text-align: left;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+tr.hovered {
+  background-color: #f9f9f9;
+}
+
+tr.highlighted {
+  background-color: #e3f2fd;
+}
+
+/* === Sticky header row === */
+tr.mat-header-row {
+  background-color: #f1f1f1;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+/* === Scrollbar ẩn nhưng vẫn cuộn được === */
+.modal-body::-webkit-scrollbar,
+.table-responsive::-webkit-scrollbar {
+  height: 0;
+  width: 0;
+  background: transparent;
+}
+
+.modal-body {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE 10+ */
+}
+
+/* === Responsive fix === */
+@media (max-width: 768px) {
+  .modal-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .ja_btn-addnew,
+  .ja_btn-goback {
+    width: 100%;
+    margin: 8px 0;
+  }
+}
+
+
+/* Overlay fix */
+::ng-deep .cdk-overlay-container {
+  z-index: 9999 !important;
+}

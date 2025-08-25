@@ -1,0 +1,16 @@
+.sort-icon {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+  vertical-align: middle;
+  transition: all 0.2s ease;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+:host {
+  display: inline-flex;
+  align-items: center;
+}

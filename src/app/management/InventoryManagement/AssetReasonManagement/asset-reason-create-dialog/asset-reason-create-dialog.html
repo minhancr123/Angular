@@ -1,0 +1,40 @@
+<mat-card class="p-3">
+  <mat-card-title class="mb-3">THÊM MỚI LÝ DO TĂNG GIẢM TÀI SẢN</mat-card-title>
+  <mat-card-content [formGroup]="form">
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <mat-form-field appearance="fill" class="w-100">
+          <mat-label>Chọn loại tăng giảm</mat-label>
+          <mat-select formControlName="LoaiTangGiam">
+            <mat-option value="1">Tăng tài sản</mat-option>
+            <mat-option value="2">Giảm tài sản</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-md-6">
+        <mat-form-field appearance="fill" class="w-100">
+          <mat-label>Nhập mã tăng giảm</mat-label>
+          <input matInput formControlName="MaTangGiam" />
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <mat-form-field appearance="fill" class="w-100">
+          <mat-label>Nhập tên tăng giảm</mat-label>
+          <input matInput formControlName="TenTangGiam" />
+        </mat-form-field>
+      </div>
+      <div class="col-md-6 d-flex align-items-center">
+        <mat-checkbox formControlName="TrangThai">Còn hiệu lực</mat-checkbox>
+      </div>
+    </div>
+  </mat-card-content>
+
+  <mat-card-actions class="justify-content-end gap-3" >
+    <button mat-flat-button color="primary" (click)="onSave(false)">Lưu và trở lại</button>
+    <button mat-flat-button color="accent" (click)="onSave(true)">Lưu và tiếp tục</button>
+    <button mat-raised-button (click)="onBack()">Trở lại</button>
+  </mat-card-actions>
+</mat-card>

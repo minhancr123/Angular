@@ -1,0 +1,27 @@
+<h1 mat-dialog-title>Sửa loại mặt hàng</h1>
+<div mat-dialog-content [formGroup]="form">
+  <mat-form-field appearance="fill" class="w-100">
+    <mat-label>Tên loại mặt hàng</mat-label>
+    <input matInput formControlName="tenLoai" />
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="w-100">
+    <mat-label>Loại mặt hàng cha</mat-label>
+    <input matInput formControlName="loaiChaId" />
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="w-100">
+    <mat-label>Độ ưu tiên</mat-label>
+    <input matInput type="number" formControlName="doUuTien" />
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="w-100">
+    <mat-label>Mô tả</mat-label>
+    <textarea matInput formControlName="moTa"></textarea>
+  </mat-form-field>
+</div>
+
+<div mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Hủy</button>
+  <button mat-flat-button color="primary" (click)="save()" [disabled]="form.invalid">Lưu</button>
+</div>

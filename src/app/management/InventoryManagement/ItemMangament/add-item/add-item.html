@@ -1,0 +1,238 @@
+<!-- them-moi-mat-hang.component.html -->
+<mat-card>
+  <mat-card-header class="d-flex justify-content-between align-items-center">
+    <mat-card-title>QUẢN LÝ MẶT HÀNG</mat-card-title>
+    <div>
+      <button mat-raised-button color="primary" class="me-2" (click)="onSave()">
+        <mat-icon>save</mat-icon> Lưu
+      </button>
+      <button mat-raised-button color="accent" class="me-2" (click)="onReset()">Đặt lại</button>
+      <button mat-button (click)="onBack()">← Trở lại</button>
+    </div>
+  </mat-card-header>
+
+  <mat-card-content>
+    <form [formGroup]="form">
+      <!-- Form thông tin cơ bản cho tab đầu tiên -->
+      <div class="row mb-4">
+        <div class="col-md-6">
+          <mat-form-field appearance="fill" class="w-100">
+            <mat-label>Mã hàng *</mat-label>
+            <input matInput formControlName="maHang" />
+            <mat-error *ngIf="form.get('maHang').touched && form.get('maHang').hasError('required')">
+              Vui lòng nhập vào mã hàng
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-md-6">
+          <mat-form-field appearance="fill" class="w-100">
+            <mat-label>Tên mặt hàng *</mat-label>
+            <input matInput formControlName="tenMatHang" />
+            <mat-error *ngIf="form.get('tenMatHang').touched && form.get('tenMatHang').hasError('required')">
+              Vui lòng nhập vào tên mặt hàng
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+
+      <!-- Tabs -->
+      <mat-tab-group>
+        <mat-tab label="Thông tin cơ bản">
+          <div class="row mt-3">
+            <!-- Cột trái -->
+            <div class="col-md-4">
+              <mat-form-field appearance="fill" class="w-100 mb-3">
+                <mat-label>Loại mặt hàng</mat-label>
+                <mat-select formControlName="idLMH">
+                  <mat-option *ngFor="let lmh of loaiMatHangList" [value]="lmh.IdLMH">
+                    {{ lmh.TenLMH }}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="form.get('idLMH')?.hasError('required') && form.get('idLMH')?.touched">
+                  Vui lòng chọn loại mặt hàng
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field appearance="fill" class="w-100 mb-3">
+                <mat-label>Tên On Site</mat-label>
+                <input matInput formControlName="tenOnSite" />
+              </mat-form-field>
+
+              <mat-form-field appearance="fill" class="w-100 mb-3">
+                <mat-label>Giá mua</mat-label>
+                <input matInput formControlName="giaMua" type="number" />
+                 <mat-error *ngIf="form.get('giaMua').touched && form.get('giaMua').hasError('required')">
+                  Vui lòng nhập vào giá mua
+                </mat-error>
+                 <mat-error *ngIf="form.get('giaMua')?.hasError('min')">
+                  Giá mua không được nhỏ hơn 0
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field appearance="fill" class="w-100 mb-3">
+                <mat-label>Đơn vị tính cấp 2</mat-label>
+                <input matInput formControlName="dvtCap2" />
+              </mat-form-field>
+
+              <mat-checkbox formControlName="theoDoiLo" class="mb-3">Theo dõi lô</mat-checkbox>
+
+              <mat-form-field appearance="fill" class="w-100 mb-3">
+                <mat-label>Mô tả</mat-label>
+                <textarea matInput formControlName="moTa" rows="3"></textarea>
+              </mat-form-field>
+            </div>
+
+            <!-- Cột giữa -->
+            <div class="col-md-4">
+              <mat-form-field appearance="fill" class="w-100 mb-3">
+                <mat-label>Đơn vị tính</mat-label>
+               <mat-select formControlName="donViTinh">
+                  <mat-option *ngFor="let dvt of dvtList" [value]="dvt.IdDVT">
+                    {{ dvt.TenDVT }}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="form.get('donViTinh')?.hasError('required') && form.get('donViTinh')?.touched">
+                  Vui lòng chọn đơn vị tính
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field appearance="fill" class="w-100 mb-3">
+                <mat-label>VAT</mat-label>
+                <input matInput formControlName="vat" type="number" />
+                <mat-error *ngIf="form.get('vat')?.hasError('min')">
+                  VAT không được nhỏ hơn 0
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field appearance="fill" class="w-100 mb-3">
+                <mat-label>Giá bán</mat-label>
+                <input matInput formControlName="giaBan" type="number" />
+                 <mat-error *ngIf="form.get('giaBan').touched && form.get('giaBan').hasError('required')">
+                  Vui lòng nhập vào giá bán
+                </mat-error>
+                 <mat-error *ngIf="form.get('giaBan')?.hasError('min')">
+                  Giá bán không được nhỏ hơn 0
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field appearance="fill" class="w-100 mb-3">
+                <mat-label>Quy đổi ĐVT cấp 2</mat-label>
+                <input matInput formControlName="quyDoiDvtCap2" type="number" />
+              </mat-form-field>
+
+              <mat-checkbox formControlName="laTaiSan" class="mb-3">Là tài sản</mat-checkbox>
+            </div>
+
+            <!-- Cột phải -->
+            <div class="col-md-4">
+              <mat-form-field appearance="fill" class="w-100 mb-3">
+                <mat-label>Số kỳ khấu hao tối thiểu</mat-label>
+                <input matInput formControlName="soKyKhauHaoToiThieu" type="number" />
+              </mat-form-field>
+
+              <mat-form-field appearance="fill" class="w-100 mb-3">
+                <mat-label>Số kỳ khấu hao tối đa</mat-label>
+                <input matInput formControlName="soKyKhauHaoToiDa" type="number" />
+              </mat-form-field>
+
+              <mat-form-field appearance="fill" class="w-100 mb-3">
+                <mat-label>Định mức tồn tối thiểu</mat-label>
+                <input matInput formControlName="tonToiThieu" type="number" />
+              </mat-form-field>
+
+              <mat-form-field appearance="fill" class="w-100 mb-3">
+                <mat-label>Định mức tồn tối đa</mat-label>
+                <input matInput formControlName="tonToiDa" type="number" />
+              </mat-form-field>
+
+              <mat-form-field appearance="fill" class="w-100 mb-3">
+                <mat-label>Đơn vị tính cấp 3</mat-label>
+                <input matInput formControlName="dvtCap3" />
+              </mat-form-field>
+
+              <mat-form-field appearance="fill" class="w-100 mb-3">
+                <mat-label>Quy đổi ĐVT cấp 3</mat-label>
+                <input matInput formControlName="quyDoiDvtCap3" type="number" />
+              </mat-form-field>
+
+              <mat-form-field appearance="fill" class="w-100 mb-3">
+                <mat-label>Chi tiết mô tả</mat-label>
+                <textarea matInput formControlName="chiTietMoTa" rows="3"></textarea>
+              </mat-form-field>
+            </div>
+          </div>
+        </mat-tab>
+        <!-- Các tab khác -->
+        <mat-tab label="Thông tin phụ"></mat-tab>
+        <mat-tab label="Hình ảnh chính">
+          <div class="mt-3">
+            <!-- Chọn mặt hàng để thêm hình ảnh -->
+            <div class="row mb-4">
+              <div class="col-12">
+                <h6>Chọn mặt hàng để thêm/cập nhật hình ảnh:</h6>
+                <mat-form-field appearance="fill" class="w-100">
+                  <mat-label>Chọn mặt hàng</mat-label>
+                  <mat-select formControlName="selectedMatHang" (selectionChange)="onMatHangSelected($event)">
+                    <mat-option *ngFor="let item of matHangList" [value]="item">
+                      {{ item.MaHang }} - {{ item.TenMatHang }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <!-- Hiển thị thông tin mặt hàng đã chọn -->
+            <div *ngIf="selectedMatHang" class="row mb-4">
+              <div class="col-12">
+                <div class="card border-info">
+                  <div class="card-body">
+                    <h6 class="card-title text-info">Thông tin mặt hàng đã chọn:</h6>
+                    <div class="row">
+                      <div class="col-md-4">
+                        <p><strong>Mã hàng:</strong> {{ selectedMatHang.MaHang }}</p>
+                        <p><strong>Tên mặt hàng:</strong> {{ selectedMatHang.TenMatHang }}</p>
+                      </div>
+                      <div class="col-md-4">
+                        <p><strong>Giá mua:</strong> {{ selectedMatHang.GiaMua | currency:'VND' }}</p>
+                        <p><strong>Giá bán:</strong> {{ selectedMatHang.GiaBan | currency:'VND' }}</p>
+                      </div>
+                      <div class="col-md-4">
+                        <div *ngIf="selectedMatHang.HinhAnh">
+                          <p><strong>Hình ảnh hiện tại:</strong></p>
+                          <img [src]="selectedMatHang.HinhAnh" alt="Current Image" style="max-width: 100px; border: 1px solid #ddd; border-radius: 4px;" />
+                        </div>
+                        <p *ngIf="!selectedMatHang.HinhAnh" class="text-muted">Chưa có hình ảnh</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Upload hình ảnh -->
+            <div class="row">
+              <div class="col-12">
+                <h6>Tải lên hình ảnh mới:</h6>
+                <input type="file" (change)="onFileSelected($event)" accept="image/*" class="form-control mb-3" />
+                
+                <!-- Hiển thị preview ảnh -->
+                <div *ngIf="previewUrl" class="mt-2 d-flex gap-2 align-items-center">
+                  <img [src]="previewUrl" alt="Preview" style="max-width: 200px; border: 1px solid #ddd; border-radius: 4px;" />
+                  <button mat-raised-button color="primary" (click)="onUploadImage()" [disabled]="!selectedMatHang">
+                    <mat-icon>cloud_upload</mat-icon> Lưu hình ảnh
+                  </button>
+                </div>
+                
+                <div *ngIf="!selectedMatHang" class="alert alert-info mt-3">
+                  Vui lòng chọn mặt hàng trước khi tải lên hình ảnh.
+                </div>
+              </div>
+            </div>
+          </div>
+        </mat-tab>
+        <mat-tab label="Hình ảnh phụ"></mat-tab>
+      </mat-tab-group>
+    </form>
+  </mat-card-content>
+</mat-card>

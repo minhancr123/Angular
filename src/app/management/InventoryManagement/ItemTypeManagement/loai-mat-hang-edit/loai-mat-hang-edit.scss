@@ -1,0 +1,440 @@
+/* ===== DIALOG CONTAINER ===== */
+::ng-deep .mat-dialog-container {
+  padding: 0 !important;
+  border-radius: 16px !important;
+  overflow: hidden !important;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15) !important;
+  max-width: 600px !important;
+  width: 90vw !important;
+  background: #ffffff !important;
+}
+
+/* ===== DIALOG TITLE ===== */
+::ng-deep .mat-dialog-title {
+  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0 !important;
+  padding: 24px 32px !important;
+  text-align: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #4f46e5 0%, #7c3aed 50%, #ec4899 100%);
+  }
+}
+
+/* ===== DIALOG CONTENT ===== */
+::ng-deep mat-dialog-content {
+  padding: 32px !important;
+  background: #ffffff;
+  margin: 0 !important;
+  max-height: none !important;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 32px;
+    right: 32px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, #e5e7eb 50%, transparent 100%);
+  }
+}
+
+/* ===== FORM STYLES ===== */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* ===== MATERIAL FORM FIELDS ===== */
+mat-form-field {
+  width: 100%;
+  font-family: 'Roboto', sans-serif;
+
+  &.w-100 {
+    width: 100%;
+  }
+
+  &.mat-form-field-appearance-fill {
+    .mat-form-field-wrapper {
+      padding-bottom: 1.25em;
+    }
+
+    .mat-form-field-flex {
+      background: #f8fafc;
+      border-radius: 12px;
+      padding: 0 16px;
+      min-height: 60px;
+      border: 2px solid transparent;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+        z-index: -1;
+      }
+
+      &:hover {
+        background: #f1f5f9;
+        border-color: #e2e8f0;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      }
+    }
+
+    .mat-form-field-underline {
+      display: none;
+    }
+
+    .mat-form-field-label {
+      color: #64748b;
+      font-size: 16px;
+      font-weight: 500;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      top: 1.28125em;
+    }
+
+    .mat-input-element {
+      color: #1e293b;
+      font-size: 16px;
+      font-weight: 500;
+      padding: 20px 0 12px 0;
+      background: transparent;
+      border: none;
+      outline: none;
+      caret-color: #4f46e5;
+
+      &::placeholder {
+        color: #94a3b8;
+        opacity: 1;
+      }
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    // Textarea specific styling
+    textarea.mat-input-element {
+      min-height: 80px;
+      resize: vertical;
+      line-height: 1.5;
+      padding: 20px 0 12px 0;
+    }
+
+    // Focused state
+    &.mat-focused {
+      .mat-form-field-flex {
+        background: #ffffff;
+        border-color: #4f46e5;
+        box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        transform: translateY(-2px);
+
+        &::before {
+          background: linear-gradient(135deg, #ffffff 0%, #faf5ff 100%);
+        }
+      }
+
+      .mat-form-field-label {
+        color: #4f46e5;
+        font-weight: 600;
+      }
+    }
+
+    // Has value state
+    &.mat-form-field-has-value:not(.mat-form-field-disabled) {
+      .mat-form-field-label {
+        color: #475569;
+        font-weight: 600;
+      }
+    }
+
+    // Error state
+    &.mat-form-field-invalid {
+      .mat-form-field-flex {
+        border-color: #ef4444;
+        background: #fef2f2;
+
+        &::before {
+          background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+        }
+      }
+
+      .mat-form-field-label {
+        color: #ef4444;
+      }
+
+      .mat-input-element {
+        color: #ef4444;
+        caret-color: #ef4444;
+      }
+    }
+
+    // Disabled state
+    &.mat-form-field-disabled {
+      .mat-form-field-flex {
+        background: #f1f5f9;
+        border-color: #e2e8f0;
+        opacity: 0.6;
+      }
+
+      .mat-form-field-label {
+        color: #94a3b8;
+      }
+
+      .mat-input-element {
+        color: #94a3b8;
+      }
+    }
+
+    // Required marker
+    .mat-form-field-required-marker {
+      color: #ef4444;
+      font-weight: 700;
+    }
+  }
+}
+
+/* ===== ERROR MESSAGES ===== */
+.mat-error {
+  font-size: 13px;
+  color: #ef4444;
+  margin-top: 8px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  animation: slideInError 0.3s ease-out;
+
+  &::before {
+    content: '⚠';
+    margin-right: 6px;
+    font-size: 14px;
+  }
+}
+
+@keyframes slideInError {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== DIALOG ACTIONS ===== */
+::ng-deep mat-dialog-actions {
+  padding: 24px 32px 32px 32px !important;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  border-top: 1px solid #e2e8f0;
+  margin: 0 !important;
+  min-height: auto !important;
+  gap: 16px;
+  justify-content: flex-end;
+
+  button {
+    min-width: 120px;
+    height: 48px;
+    font-weight: 600;
+    text-transform: none;
+    border-radius: 12px;
+    font-size: 15px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+
+    // Cancel button
+    &[mat-button] {
+      background: transparent;
+      color: #64748b;
+      border: 2px solid #e2e8f0;
+
+      &:hover {
+        background: #f1f5f9;
+        color: #475569;
+        border-color: #cbd5e1;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+
+      &:active {
+        transform: translateY(0);
+      }
+    }
+
+    // Save button
+    &[mat-flat-button][color="primary"] {
+      background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+      color: #ffffff;
+      border: none;
+      box-shadow: 0 4px 15px rgba(79, 70, 229, 0.3);
+
+      &:hover:not(:disabled) {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(79, 70, 229, 0.4);
+      }
+
+      &:active:not(:disabled) {
+        transform: translateY(0);
+      }
+
+      &:disabled {
+        background: #e2e8f0;
+        color: #94a3b8;
+        cursor: not-allowed;
+        transform: none;
+        box-shadow: none;
+      }
+
+      // Ripple effect
+      &::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.3);
+        transition: all 0.3s ease;
+        transform: translate(-50%, -50%);
+      }
+
+      &:active:not(:disabled)::before {
+        width: 300px;
+        height: 300px;
+      }
+    }
+  }
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 768px) {
+  ::ng-deep .mat-dialog-container {
+    width: 95vw !important;
+    margin: 16px !important;
+  }
+
+  ::ng-deep .mat-dialog-title {
+    font-size: 18px;
+    padding: 20px 24px !important;
+  }
+
+  ::ng-deep .mat-dialog-content {
+    padding: 24px !important;
+  }
+
+  ::ng-deep .mat-dialog-actions {
+    padding: 20px 24px 24px 24px !important;
+    flex-direction: column;
+
+    button {
+      width: 100%;
+      margin: 4px 0;
+    }
+  }
+
+  mat-form-field .mat-form-field-flex {
+    min-height: 56px;
+  }
+
+  .mat-input-element {
+    font-size: 16px; // Prevent zoom on iOS
+  }
+}
+
+@media (max-width: 576px) {
+  ::ng-deep .mat-dialog-title {
+    font-size: 16px;
+    padding: 16px 20px !important;
+  }
+
+  ::ng-deep .mat-dialog-content {
+    padding: 20px !important;
+  }
+
+  ::ng-deep .mat-dialog-actions {
+    padding: 16px 20px 20px 20px !important;
+  }
+
+  form {
+    gap: 20px;
+  }
+
+  .mat-form-field .mat-form-field-flex {
+    min-height: 52px;
+  }
+}
+
+/* ===== ANIMATIONS ===== */
+::ng-deep .mat-dialog-container {
+  animation: slideInScale 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes slideInScale {
+  0% {
+    transform: scale(0.8) translateY(50px);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+/* ===== FOCUS MANAGEMENT ===== */
+mat-form-field:focus-within {
+  z-index: 1;
+}
+
+/* ===== LOADING STATE ===== */
+.loading-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(2px);
+}
+
+/* ===== UTILITY CLASSES ===== */
+.w-100 {
+  width: 100% !important;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.mb-16 {
+  margin-bottom: 16px;
+}
+
+.mt-16 {
+  margin-top: 16px;
+}

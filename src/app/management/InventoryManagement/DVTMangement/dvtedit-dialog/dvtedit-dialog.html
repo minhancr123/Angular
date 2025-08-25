@@ -1,0 +1,14 @@
+<h2 mat-dialog-title>Sửa đơn vị tính</h2>
+
+<mat-dialog-content [formGroup]="form">
+  <mat-form-field appearance="outline" class="w-100 p-2">
+    <mat-label>Tên đơn vị tính</mat-label>
+    <input matInput formControlName="TenDVT" />
+    <mat-error *ngIf="form.get('TenDVT')?.hasError('required')">Bắt buộc</mat-error>
+  </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="cancel()">Hủy</button>
+  <button mat-flat-button color="primary" (click)="save()" [disabled]="form.invalid">Lưu</button>
+</mat-dialog-actions>

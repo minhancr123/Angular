@@ -1,0 +1,67 @@
+/* Paginator container */
+.d-flex.flex-wrap.py-2.mr-3 {
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 1rem;
+}
+
+/* Paginator component */
+ng-pagination ::ng-deep .pagination {
+  margin-bottom: 0;
+}
+
+ng-pagination ::ng-deep .page-link {
+  color: #007bff;
+  border: 1px solid #dee2e6;
+  padding: 0.375rem 0.75rem;
+  font-size: 0.875rem;
+}
+
+ng-pagination ::ng-deep .page-item.active .page-link {
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
+}
+
+ng-pagination ::ng-deep .page-item.disabled .page-link {
+  color: #6c757d;
+  pointer-events: none;
+  background-color: #f8f9fa;
+  border-color: #dee2e6;
+}
+
+/* Loading section */
+.d-flex.align-items-center.py-3 {
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+
+.spinner {
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid rgba(0, 0, 0, 0.1);
+  border-top-color: #007bff;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Page size select */
+select.form-control-sm {
+  width: 75px;
+  font-size: 0.875rem;
+  padding: 0.25rem 0.5rem;
+}
+
+/* Text hiển thị dòng */
+.react-bootstrap-table-pagination-total {
+  font-size: 0.875rem;
+  font-weight: 500;
+}

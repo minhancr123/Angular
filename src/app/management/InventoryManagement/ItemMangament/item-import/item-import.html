@@ -1,0 +1,73 @@
+<div
+  style="max-width: 600px; height: 240px; display: flex; flex-direction: column; gap: 8px; position: relative; padding: 16px;"
+>
+  <!-- Tiêu đề -->
+  <!-- Nút Trở lại ở trên cùng, căn phải -->
+  <div style="display: flex; justify-content: space-between;">
+      <h3 style="font-weight: 600;">Import dữ liệu Excel</h3>
+    <button
+      mat-raised-button
+      color="warn"
+      (click)="goBack()"
+      style="min-width: 100px; height: 40px;"
+    >
+      Trở lại
+    </button>
+  </div>
+
+  <!-- Phần còn lại nằm dưới -->
+  <div
+    class="d-flex align-items-center gap-2"
+    style="flex: 1; flex-wrap: wrap;"
+  >
+    <mat-form-field appearance="outline" style="flex: 1; min-width: 0;">
+      <mat-label>Chọn file dữ liệu *</mat-label>
+      <input
+        matInput
+        type="text"
+        [value]="selectedFile?.name || ''"
+        placeholder="Chọn file Excel"
+        readonly
+        (click)="fileInput.click()"
+        style="cursor: pointer;"
+      />
+      <button
+        mat-icon-button
+        matSuffix
+        (click)="fileInput.click()"
+        aria-label="Chọn file"
+        style="margin-right: 4px;"
+      >
+        <mat-icon>attach_file</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <input
+      type="file"
+      #fileInput
+      id="fileInput"
+      (change)="onFileChange($event)"
+      accept=".xlsx, .xls"
+      hidden
+    />
+
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="importData()"
+      [disabled]="!selectedFile"
+      style="min-width: 120px; height: 40px;"
+    >
+      Import dữ liệu
+    </button>
+
+    <button
+      mat-raised-button
+      color="accent"
+      (click)="downloadTemplate()"
+      style="min-width: 120px; height: 40px; background-color: #2e7d32; color: white;"
+    >
+      Tải file mẫu
+    </button>
+  </div>
+</div>

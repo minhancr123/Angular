@@ -1,0 +1,25 @@
+<h2 mat-dialog-title>Thêm mới xuất xứ</h2>
+<form [formGroup] = "createForm"> 
+    <div mat-dialog-content>
+        <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Tên xuất xứ</mat-label>
+            <input matInput formControlName="TenXuatXu" placeholder="Nhập tên xuất xứ" required>
+            <mat-error *ngIf="createForm.get('TenXuatXu')?.hasError('required')">
+                Vui lòng nhập tên xuất xứ
+            </mat-error>
+        </mat-form-field>
+    </div>
+
+    <div mat-dialog-actions align="end">
+        <button mat-button type="button" (click)="onCancel()">Hủy</button>
+         <!-- Nút Lưu và trở lại -->
+        <button mat-raised-button color="primary" type="submit" [disabled]="createForm.invalid" (click)="onSubmitAndClose()">
+            Lưu và trở lại
+        </button>
+
+        <!-- Nút Lưu và thêm mới -->
+        <button mat-raised-button color="accent" type="submit" [disabled]="createForm.invalid" (click)="onSubmitAndReset()">
+            Lưu và thêm mới
+  </button>
+    </div>
+ </form>

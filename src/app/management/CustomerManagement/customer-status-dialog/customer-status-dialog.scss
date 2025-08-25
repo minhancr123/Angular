@@ -1,0 +1,30 @@
+.modal-content{
+    padding: 10px;
+}
+
+.ja_btn-addnew, .ja_btn-goback {
+  padding: 8px 16px;
+  font-weight: 600;
+  font-size: 14px;
+  border-radius: 6px;
+  min-width: 100px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Nút Lưu */
+.ja_btn-addnew {
+  background-color: #1976d2; /* Màu xanh dương */
+  color: #fff;
+}
+.ja_btn-addnew:hover {
+  background-color: #125aa0;
+}
+
+/* Nút Trở lại */
+.ja_btn-goback {
+  background-color: #e0e0e0; /* Màu xám nhạt */
+  color: #333;
+}
+.ja_btn-goback:hover {
+  background-color: #c5c5c5;
+}

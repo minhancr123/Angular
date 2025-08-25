@@ -1,0 +1,58 @@
+<style>
+	:host>>>.custom-dialog-container .mat-dialog-container {
+		padding: 0px !important;
+	}
+
+
+	.btn {
+		font-family: 'Roboto';
+		font-weight: 400;
+		font-size: 1.02rem;
+		border-radius: 3px;
+		padding: 5px 20px 5px 20px;
+	}
+
+	.btn-primary {
+		background-color: #3699ff;
+	}
+
+	.modal-body {
+		padding-bottom: 50px
+	}
+
+	.modal-footer {
+		padding-left: 20px;
+		padding-right: 20px;
+	}
+</style>
+<ng-container *ngIf="viewLoading">
+	<div class="progress progress-modal">
+		<div class="progress-bar progress-bar-striped progress-bar-animated bg-primary" role="progressbar"
+			style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+	</div>
+</ng-container>
+
+<h2 mat-dialog-title class="text-success">{{ data.title }}</h2>
+
+<mat-dialog-content class="text-center">
+  <ng-container *ngIf="viewLoading">
+    <mat-progress-bar mode="indeterminate" color="primary"></mat-progress-bar>
+    <p class="mt-3">{{ data.waitDesciption }}</p>
+  </ng-container>
+
+  <ng-container *ngIf="!viewLoading">
+    <p *ngIf="data.description; else defaultText">{{ data.description }}</p>
+    <ng-template #defaultText>
+      Bạn có muốn xoá đối tượng này không? Lưu ý: Một khi đã xoá thì không thể hoàn tác.
+    </ng-template>
+  </ng-container>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end" *ngIf="!viewLoading">
+  <button mat-stroked-button color="primary" (click)="onNoClick()">
+    {{ data.nameButtonCancel || 'Không' }}
+  </button>
+  <button mat-flat-button color="warn" (click)="onYesClick()">
+    {{ data.nameButtonOK || 'Có' }}
+  </button>
+</mat-dialog-actions>

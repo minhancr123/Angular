@@ -1,0 +1,84 @@
+<app-card
+  [cardTitle]="'ACCOUNTMANAGEMENT.DANHSACHTAIKHOAN' | translate"
+  [options]="true"
+  blockClass="mb-5"
+>
+  <!-- Filter form -->
+ <form class="row g-3 mb-3 align-items-end">
+  <div class="col-lg-2" *ngIf="auth.currentUserValue.IsMasterAccount" [formGroup]="filterGroup">
+    <label class="form-label fw-bold">{{ 'ACCOUNTMANAGEMENT.DOITAC' | translate }}</label>
+    <select class="form-select" formControlName="doitac">
+      <option value="-1">{{ 'COMMOM.TATCA' | translate }}</option>
+      <option *ngFor="let item of partnerFilters" [value]="item.RowId">
+        {{ item.PartnerName }}
+      </option>
+    </select>
+  </div>
+
+  <div class="col-lg-2" [formGroup]="searchGroup">
+    <label class="form-label fw-bold">{{ 'ACCOUNTMANAGEMENT.HOTEN' | translate }}</label>
+    <input type="text" class="form-control" formControlName="searchTerm" />
+  </div>
+
+  <div class="col-lg-2" [formGroup]="filterGroup">
+    <label class="form-label fw-bold">{{ 'PARTNERMANAGEMENT.TINHTRANG' | translate }}</label>
+    <select class="form-select" formControlName="status">
+      <option value="-1">{{ 'COMMOM.TATCA' | translate }}</option>
+      <option value="0">{{ 'COMMOM.DANGSUDUNG' | translate }}</option>
+      <option value="1">{{ 'COMMOM.TAMKHOA' | translate }}</option>
+    </select>
+  </div>
+
+ <!-- Nút nằm ở hàng mới, kéo sang phải -->
+  <div class="col-lg-8 d-flex justify-content-end">
+    <button class="btn btn-danger" (click)="create()">
+      {{ 'ACCOUNTMANAGEMENT.THEMTAIKHOAN' | translate }}
+    </button>
+  </div>
+</form>
+
+
+  <!-- Table -->
+  <div class="table-responsive" [ngStyle]="{ height: getHeight() }">
+    <table class="table table-bordered table-hover align-middle">
+      <thead class="table-light">
+        <tr>
+          <th>STT</th>
+          <th>Username</th>
+          <th>{{ 'PARTNERMANAGEMENT.TENDOITAC' | translate }}</th>
+          <th>{{ 'ACCOUNTMANAGEMENT.HOTEN' | translate }}</th>
+          <th>{{ 'PARTNERMANAGEMENT.DIENTHOAI' | translate }}</th>
+          <th>{{ 'ACCOUNTMANAGEMENT.NGAYTAO' | translate }}</th>
+          <th>{{ 'ACCOUNTMANAGEMENT.DANGNHAPLANCUOI' | translate }}</th>
+          <th class="text-center">{{ 'PARTNERMANAGEMENT.TINHTRANG' | translate }}</th>
+          <th class="text-center">{{ 'COMMOM.THAOTHAC' | translate }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let r of accountManagementService.items$ | async; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ r.Username }}</td>
+          <td>{{ r.PartnerName }}</td>
+          <td>{{ r.Fullname }}</td>
+          <td>{{ r.Mobile }}</td>
+          <td>{{ r.CreatedDate }}</td>
+          <td>{{ r.LastLogin }}</td>
+          <td class="text-center text-white" [ngStyle]="{ backgroundColor: getColorStatus(r.IsLock), cursor: 'pointer' }"
+              (click)="updateStatus(r)">
+            {{ getTileStatus(r.IsLock) }}
+          </td>
+          <td class="text-center">
+            <i class="bi bi-pencil-square text-success" style="cursor: pointer;" (click)="update(r)"></i>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Paginator -->
+  <app-paginator class="d-flex justify-content-between align-items-center flex-wrap"
+    [paginator]="paginator"
+    [isLoading]="isLoading"
+    (paginate)="paginate($event)">
+  </app-paginator>
+</app-card>

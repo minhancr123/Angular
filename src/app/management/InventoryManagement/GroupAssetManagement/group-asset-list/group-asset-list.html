@@ -1,0 +1,61 @@
+<app-card [cardTitle]="'Nhóm tài sản' | translate">
+  <mat-card-title class="mb-3">Danh sách nhóm tài sản</mat-card-title>
+
+  <div class="mb-3 text-end">
+    <button mat-flat-button color="primary" (click)="create()" *ngIf="service.Visible">
+      Thêm mới
+    </button>
+  </div>
+
+  <table mat-table [dataSource]="service.items$ | async" class="mat-elevation-z2 w-100" matSort>
+    <ng-container matColumnDef="stt">
+    <th mat-header-cell *matHeaderCellDef>#</th>
+    <td mat-cell *matCellDef="let item; let i = index">{{ i + 1 }}</td>
+    </ng-container>
+
+    <!-- Mã loại -->
+    <ng-container matColumnDef="maNhom">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Mã nhóm</th>
+      <td mat-cell *matCellDef="let item">{{ item.MaNhom }}</td>
+    </ng-container>
+
+    <!-- Tên loại -->
+    <ng-container matColumnDef="tenNhom">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Tên nhóm</th>
+      <td mat-cell *matCellDef="let item">{{ item.TenNhom }}</td>
+    </ng-container>
+    
+      <!-- Trạng thái -->
+      <ng-container matColumnDef="trangThai">
+        <th mat-header-cell *matHeaderCellDef> Còn hiệu lực </th>
+        <td mat-cell *matCellDef="let item">
+          <mat-icon color="{{ item.TrangThai ? 'primary' : 'warn' }}">
+            {{ !item.TrangThai ? 'cancel' : 'check_circle' }}
+          </mat-icon>
+        </td>
+      </ng-container>
+
+    <!-- Hành động -->
+    <ng-container matColumnDef="thaotac">
+      <th mat-header-cell *matHeaderCellDef>Thao tác</th>
+      <td mat-cell *matCellDef="let item">
+        <button mat-icon-button color="primary" (click)="edit(item)" *ngIf="service.Visible">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" (click)="delete(item)" *ngIf="service.Visible">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <!-- Paginator -->
+    <app-paginator
+      [paginator]="paginator"
+      [isLoading]="isLoading"
+      (paginate)="paginate($event)">
+    </app-paginator>
+</app-card>

@@ -1,0 +1,83 @@
+:host {
+  width: 100%;
+  @media (min-width: 992px) {
+    .login-form {
+      width: 100%;
+      max-width: 450px;
+
+      .mat-form-field {
+        width: 100%;
+      }
+    }
+  }
+
+
+.login-form {
+  max-width: 400px;
+  margin: auto;
+  padding: 40px 30px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.login-form h3 {
+  font-size: 28px;
+  font-weight: bold;
+  color: #219b3c;
+  text-transform: uppercase;
+}
+
+.alert {
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  display: block;
+  color: #333;
+}
+
+.form-control {
+  height: 48px;
+  padding: 10px 16px;
+  font-size: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f7f7f7;
+  transition: all 0.3s ease;
+}
+
+.form-control:focus {
+  border-color: #219b3c;
+  background-color: #fff;
+  box-shadow: 0 0 0 2px rgba(33, 155, 60, 0.2);
+}
+
+button[type="submit"] {
+  background-color: #219b3c;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: #1a7f30;
+}
+
+.spinner {
+  margin-left: 10px;
+}
+}

@@ -1,0 +1,146 @@
+<div class="modal-content">
+  <!-- Modal Header -->
+  <div class="modal-header d-flex justify-content-between align-items-center flex-wrap gap-2">
+    <div class="h4 mb-0">
+      <span class="dialog-title">{{ getTitle() }}</span>
+    </div>
+
+    <div *ngIf="authService.currentUserValue.IsMasterAccount && item.RowId == 0 && isInitData.asObservable() | async"
+         class="d-flex align-items-center">
+      <mat-form-field class="mat-field-styled me-3 mb-0" appearance="fill">
+        <mat-label>Đối tác</mat-label>
+        <mat-select [formControl]="filterForm">
+          <mat-option *ngFor="let item of partnerFilters" [value]="item.RowId">
+            {{ item.PartnerName }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="ms-auto">
+      <button mat-raised-button
+              class="btn btn-primary me-2"
+              [class.spinner]="isLoadingSubmit$ | async"
+              [disabled]="isLoadingSubmit$ | async"
+              (click)="onSubmit()">
+        {{ 'COMMOM.LUU' | translate }}
+      </button>
+      <button mat-raised-button
+              class="btn btn-secondary"
+              (click)="goBack()">
+        {{ 'COMMOM.TROLAI' | translate }}
+      </button>
+    </div>
+  </div>
+
+  <!-- Modal Body -->
+  <div class="modal-body overlay overlay-block cursor-default overflow-auto" style="min-height: 404px; max-height: 70vh;">
+    <ng-container *ngIf="accountManagementService.isLoading$ | async">
+      <div class="overlay-layer bg-transparent">
+        <div class="spinner spinner-lg spinner-success"></div>
+      </div>
+    </ng-container>
+
+    <form [formGroup]="formGroup" class="form-label-right mt-3">
+  <div class="row g-3">
+    <!-- Giới tính -->
+    <div class="col-md-6 col-12">
+      <mat-form-field appearance="fill" class="w-100 mat-field-styled"
+                      [color]="formGroup.get('gioitinh')?.valid ? 'accent' : 'warn'">
+        <mat-label>Giới tính</mat-label>
+        <mat-select formControlName="gioitinh">
+          <mat-option value="Nam">Nam</mat-option>
+          <mat-option value="Nữ">Nữ</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <!-- Họ tên -->
+    <div class="col-md-6 col-12">
+      <mat-form-field appearance="fill" class="w-100 mat-field-styled"
+                      [color]="getControlColor('hoten')">
+        <mat-label>{{ 'ACCOUNTMANAGEMENT.HOTEN' | translate }}</mat-label>
+        <input matInput type="text" formControlName="hoten" required>
+        <mat-error *ngIf="formGroup.get('hoten')?.hasError('required')">
+          Vui lòng nhập họ tên
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <!-- Số điện thoại -->
+    <div class="col-md-6 col-12">
+      <mat-form-field appearance="fill" class="w-100 mat-field-styled"
+                      [color]="getControlColor('sodienthoai')">
+        <mat-label>{{ 'PARTNERMANAGEMENT.SODIENTHOAI' | translate }}</mat-label>
+        <input matInput type="text" formControlName="sodienthoai" required>
+        <mat-error *ngIf="formGroup.get('sodienthoai')?.hasError('required')">
+          Vui lòng nhập số điện thoại
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <!-- Email -->
+    <div class="col-md-6 col-12">
+      <mat-form-field appearance="fill" class="w-100 mat-field-styled"
+                      [color]="getControlColor('email')">
+        <mat-label>Email</mat-label>
+        <input matInput type="email" formControlName="email" required>
+        <mat-error *ngIf="formGroup.get('email')?.hasError('required')">
+          Vui lòng nhập email
+        </mat-error>
+        <mat-error *ngIf="formGroup.get('email')?.hasError('email')">
+          Email không hợp lệ
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <!-- Username -->
+    <div class="col-md-6 col-12">
+      <mat-form-field appearance="fill" class="w-100 mat-field-styled"
+                      [color]="getControlColor('username')">
+        <mat-label>Username</mat-label>
+        <input matInput type="text" formControlName="username" required>
+        <mat-error *ngIf="formGroup.get('username')?.hasError('required')">
+          Vui lòng nhập tên đăng nhập
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <!-- Mật khẩu -->
+    <div class="col-md-6 col-12">
+      <mat-form-field appearance="fill" class="w-100 mat-field-styled"
+                      [color]="getControlColor('password')">
+        <mat-label>{{ 'PARTNERMANAGEMENT.MATKHAU' | translate }}</mat-label>
+        <input matInput type="password" formControlName="password" required>
+        <mat-error *ngIf="formGroup.get('password')?.hasError('required')">
+          Vui lòng nhập mật khẩu
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <!-- Gõ lại mật khẩu -->
+    <div class="col-md-6 col-12">
+      <mat-form-field appearance="fill" class="w-100 mat-field-styled"
+                      [color]="getControlColor('repassword')">
+        <mat-label>{{ 'PARTNERMANAGEMENT.GOLAIMATKHAU' | translate }}</mat-label>
+        <input matInput type="password" formControlName="repassword" required>
+        <mat-error *ngIf="formGroup.get('repassword')?.hasError('required')">
+          Vui lòng gõ lại mật khẩu
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+
+    <!-- Ghi chú -->
+    <div class="col-md-6 col-12">
+      <mat-form-field appearance="fill" class="w-100 mat-field-styled"
+                      color="primary">
+        <mat-label>{{ 'PARTNERMANAGEMENT.GHICHU' | translate }}</mat-label>
+        <input matInput type="text" formControlName="ghichu">
+      </mat-form-field>
+    </div>
+  </div>
+</form>
+
+  </div>
+</div>

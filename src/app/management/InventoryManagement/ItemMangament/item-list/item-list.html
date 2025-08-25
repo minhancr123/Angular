@@ -1,0 +1,153 @@
+<mat-card class="card container mt-4">
+<!-- Thêm form tìm kiếm -->
+ <!-- <div class="card-title mt-2">
+      <span class="card-table">Mặt hàng</span>
+    </div> -->
+    <mat-card-header class="card-header d-flex justify-content-between align-items-center gap-2">
+      <h5 class="card-title mb-0 me-auto">Danh sách mặt hàng</h5>
+      <button mat-raised-button color="primary" (click)="create()" *ngIf="mathangService.Visible">Thêm mới</button>
+      <button mat-raised-button color="accent" (click)="importExcel()" *ngIf="mathangService.Visible" >Import dữ liệu Excel</button>&nbsp;
+      <button mat-raised-button color="warn" (click)="exportExcel()" *ngIf="mathangService.Visible" [disabled]="this.matHangList.data.length === 0">Xuất dữ liệu Excel</button>
+    </mat-card-header>
+<div class="row mb-3">
+  <div class="col-12">
+    <form [formGroup]="searchForm" class="row g-3">
+      <!-- Tìm kiếm tất cả -->
+      <div class="col-md-4">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Tìm kiếm</mat-label>
+          <input matInput placeholder="Tìm kiếm theo mã, tên mặt hàng..." formControlName="searchTerm">
+          <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+      </div>
+
+      <!-- Lọc theo đơn vị tính -->
+      <div class="col-md-4">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Đơn vị tính</mat-label>
+          <mat-select formControlName="donViTinh">
+            <mat-option value="">Tất cả</mat-option>
+            <mat-option *ngFor="let dvt of dvtList" [value]="dvt.IdDVT">
+              {{dvt.TenDVT}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <!-- Lọc theo loại mặt hàng -->
+      <div class="col-md-4">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Loại mặt hàng</mat-label>
+          <mat-select formControlName="loaiMatHang">
+            <mat-option value="">Tất cả</mat-option>
+            <mat-option *ngFor="let loai of loaiMatHangList" [value]="loai.IdLMH">
+              {{loai.TenLMH}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+    </form>
+  </div>
+</div>
+
+<!-- Action Buttons -->
+<div class="mb-3 d-flex align-items-center justify-content-between flex-wrap gap-2">
+  <div>
+    <button mat-raised-button color="warn" [disabled]="!hasCheckedItem" *ngIf="mathangService.Visible" (click)="deleteSelected()">Xóa mặt hàng</button>
+    <span class="ms-2">Số lượng đã chọn: {{ selectedItems.length }}</span>
+  </div>
+  <div>
+    
+    <!-- <button mat-raised-button color="accent" (click)="importExcel()">📥 Import dữ liệu</button> -->
+  </div>
+</div>
+
+<!-- Danh sách mặt hàng -->
+ <div class="card-body">
+<div class="table-responsive angular-bootstrap-table" >
+  <table mat-table [dataSource]="matHangList" class="table">
+
+    <!-- Checkbox -->
+    <ng-container matColumnDef="select">
+      <th mat-header-cell *matHeaderCellDef>
+        <mat-checkbox (change)="toggleAll($event)" [checked]="isAllSelected()"></mat-checkbox>
+      </th>
+      <td mat-cell *matCellDef="let row">
+        <mat-checkbox (change)="toggleSelection(row)" [checked]="isSelected(row)"></mat-checkbox>
+      </td>
+    </ng-container>
+
+    <!-- STT -->
+    <ng-container matColumnDef="stt">
+      <th mat-header-cell *matHeaderCellDef>#</th>
+      <td mat-cell *matCellDef="let row; let i = index">{{ i + 1 }}</td>
+    </ng-container>
+
+    <!-- Mã hàng -->
+    <ng-container matColumnDef="maHang">
+      <th mat-header-cell *matHeaderCellDef>Mã hàng</th>
+      <td mat-cell *matCellDef="let row">
+        <a class="text-primary" style="cursor: pointer;" (click)="viewDetail(row)">{{ row.MaHang }}</a>
+      </td>
+    </ng-container>
+
+    <!-- Tên mặt hàng -->
+    <ng-container matColumnDef="tenMatHang">
+      <th mat-header-cell *matHeaderCellDef>Tên mặt hàng</th>
+      <td mat-cell *matCellDef="let row">{{ row.TenMatHang }}</td>
+    </ng-container>
+
+    <!-- Hình ảnh -->
+    <ng-container matColumnDef="hinhAnh">
+      <th mat-header-cell *matHeaderCellDef>Hình ảnh</th>
+      <td mat-cell *matCellDef="let row">
+        <div class="image-cell">
+          <img *ngIf="row.HinhAnh" [src]="row.HinhAnh" [alt]="row.TenMatHang" 
+               class="thumbnail-image" (click)="viewDetail(row)" />
+          <div *ngIf="!row.HinhAnh" class="no-image-placeholder" (click)="viewDetail(row)">
+            <mat-icon>image_not_supported</mat-icon>
+          </div>
+        </div>
+      </td>
+    </ng-container>
+
+    <!-- Số kỳ tính khấu hao tối thiểu -->
+    <ng-container matColumnDef="soKyMin">
+      <th mat-header-cell *matHeaderCellDef>Số kỳ tính khấu hao tối thiểu</th>
+      <td mat-cell *matCellDef="let row">{{ row.SoKyTinhKhauHaoToiThieu }}</td>
+    </ng-container>
+
+    <!-- Số kỳ tính khấu hao tối đa -->
+    <ng-container matColumnDef="soKyMax">
+      <th mat-header-cell *matHeaderCellDef>Số kỳ tính khấu hao tối đa</th>
+      <td mat-cell *matCellDef="let row">{{ row.SoKyTinhKhauHaoToiDa }}</td>
+    </ng-container>
+
+    <!-- Thao tác -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef >Thao tác</th>
+      <td mat-cell *matCellDef="let row" >
+        <button mat-icon-button color="primary" (click)="edit(row)" *ngIf="mathangService.Visible">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" (click)="delete(row)" *ngIf="mathangService.Visible">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <!-- Rows -->
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>
+<!-- Paginator -->
+<app-paginator
+[paginator]="this.paginator"
+[isLoading]="isLoading"
+(paginate)="paginate($event)">
+</app-paginator>
+</div>
+
+</mat-card >

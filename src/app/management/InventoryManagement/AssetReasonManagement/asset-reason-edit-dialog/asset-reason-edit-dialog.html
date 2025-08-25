@@ -1,0 +1,28 @@
+<h2 mat-dialog-title>Chỉnh sửa lý do tăng/giảm tài sản</h2>
+
+<mat-dialog-content [formGroup]="form">
+  <mat-form-field appearance="fill" class="w-100 mb-3">
+    <mat-label>Chọn loại tăng giảm</mat-label>
+    <mat-select formControlName="LoaiTangGiam">
+      <mat-option [value]="1">Tăng tài sản</mat-option>
+      <mat-option [value]="2">Giảm tài sản</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="w-100 mb-3">
+    <mat-label>Mã tăng giảm</mat-label>
+    <input matInput formControlName="MaTangGiam" />
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="w-100 mb-3">
+    <mat-label>Tên tăng giảm</mat-label>
+    <input matInput formControlName="TenTangGiam" />
+  </mat-form-field>
+
+  <mat-checkbox formControlName="TrangThai">Còn hiệu lực</mat-checkbox>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end" class="mt-3">
+  <button mat-button (click)="cancel()">Hủy</button>
+  <button mat-flat-button color="primary" (click)="save()">Lưu</button>
+</mat-dialog-actions>

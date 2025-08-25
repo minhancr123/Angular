@@ -1,0 +1,61 @@
+<app-card [cardTitle]="'Lý do tăng giảm tài sản' | translate">
+  <mat-card-title class="mb-3">Danh sách lý do tăng giảm tài sản</mat-card-title>
+  <div class="mb-3 text-end">
+    <button mat-flat-button color="primary" (click)="create()" *ngIf="service.Visible">
+      Thêm mới
+    </button>
+  </div>
+
+  <table mat-table [dataSource]="service.items$ | async" class="mat-elevation-z2 w-100" matSort>
+
+    <!-- STT -->
+    <ng-container matColumnDef="stt">
+      <th mat-header-cell *matHeaderCellDef>#</th>
+      <td mat-cell *matCellDef="let item; let i = index">{{ i + 1 }}</td>
+    </ng-container>
+
+    <!-- Mã tăng giảm -->
+    <ng-container matColumnDef="maTangGiam">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Mã</th>
+      <td mat-cell *matCellDef="let item">{{ item.MaTangGiam }}</td>
+    </ng-container>
+
+    <!-- Tên nhóm -->
+    <ng-container matColumnDef="tenTangGiam">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Tên nhóm</th>
+      <td mat-cell *matCellDef="let item">{{ item.TenTangGiam }}</td>
+    </ng-container>
+
+    <!-- Loại tăng giảm -->
+    <ng-container matColumnDef="loaiTangGiam">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Loại</th>
+      <td mat-cell *matCellDef="let item">
+        <mat-chip [color]="item.LoaiTangGiam === 1 ? 'primary' : 'warn'" selected>
+          {{ item.LoaiTangGiam === 1 ? 'Tăng tài sản' : 'Giảm tài sản' }}
+        </mat-chip>
+      </td>
+    </ng-container>
+
+    <!-- Thao tác -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>Thao tác</th>
+      <td mat-cell *matCellDef="let item">
+        <button mat-icon-button color="primary" (click)="edit(item)" *ngIf="service.Visible">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" (click)="delete(item)" *ngIf="service.Visible">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <!-- Paginator -->
+    <app-paginator
+      [paginator]="paginator"
+      [isLoading]="isLoading"
+      (paginate)="paginate($event)">
+    </app-paginator>
+</app-card>

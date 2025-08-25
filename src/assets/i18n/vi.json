@@ -1,0 +1,39 @@
+{
+  "customermanagement": {
+    "title": "Quản lý khách hàng",
+    "thongtinkhachhang": "Thông tin khách hàng",
+    "thongtinsudung": "Thông tin sử dụng",
+    "dakhoa": "Đã khóa",
+    "dangsudung": "Đang sử dụng",
+    "saphethan": "Sắp hết hạn",
+    "dahethan": "Đã hết hạn",
+    "tatca": "Tất cả",
+    "taoboijeecustomer": "Tạo bởi JeeCustomer lúc",
+    "soluonghoso": "Số lượng hồ sơ",
+    "ngaydenhan": "Ngày đến hạn",
+    "giahanngaysudung": "Gia hạn ngày sử dụng",
+    "themsoluongnhanvien": "Thêm số lượng nhân viên",
+    "themxoaungdung": "Thêm / Xóa ứng dụng",
+    "resetmatkhau": "Reset mật khẩu",
+    "khoakhachhang": "Khóa khách hàng",
+    "mokhoakhachhang": "Mở khóa khách hàng"
+  },
+  "COMMOM": {
+    "IMPORTKHACHHANG": "Import khách hàng",
+    "THEMKHACHHANG": "Thêm khách hàng",
+    "THAOTAC": "Thao tác",
+    "TROLAI": "Trở lại",
+    "GHICHU": "Ghi chú",
+    "STT": "STT",
+    "LUU": "Lưu",
+    "HUY": "Hủy",
+    "KHONGCODULIEU": "Không có dữ liệu"
+  },
+   "CUSTOMER_INFO": {
+    "TENUNGDUNG": "Tên ứng dụng",
+    "NGAYHETHAN": "Ngày hết hạn"
+  },
+  "PARTNERMANAGEMENT": {
+    "TINHTRANG": "Tình trạng"
+  }
+}

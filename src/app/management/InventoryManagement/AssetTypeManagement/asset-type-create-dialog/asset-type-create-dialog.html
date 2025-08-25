@@ -1,0 +1,23 @@
+<h2 mat-dialog-title>Thêm loại tài sản</h2>
+<mat-dialog-content [formGroup]="form">
+  <mat-form-field appearance="fill" class="w-100 mb-3">
+    <mat-label>Mã loại</mat-label>
+    <input matInput formControlName="MaLoai" />
+    <mat-error *ngIf="form.get('MaLoai')?.hasError('required')">Không được để trống</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="w-100 mb-3">
+    <mat-label>Tên loại</mat-label>
+    <input matInput formControlName="TenLoai" />
+    <mat-error *ngIf="form.get('TenLoai')?.hasError('required')">Không được để trống</mat-error>
+
+  </mat-form-field>
+
+  <mat-checkbox formControlName="TrangThai">Còn hiệu lực</mat-checkbox>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end" class="mt-3">
+  <button mat-raised-button (click)="cancel()">Trở lại</button>
+  <button mat-raised-button color="primary" (click)="save(false)">Lưu và tiếp tục</button>
+  <button mat-flat-button color="accent" (click)="save(true)">Lưu và trở lại</button>
+</mat-dialog-actions>

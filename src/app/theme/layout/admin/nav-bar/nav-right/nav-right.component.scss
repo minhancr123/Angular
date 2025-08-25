@@ -1,0 +1,23 @@
+.user-info .user-name {
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1.2;
+}
+
+.user-info .user-role {
+  color: #6c757d; /* màu xám */
+  margin: 0;
+  font-size: 0.85rem;
+}
+
+.dud-logout {
+  margin-left: auto;
+  cursor: pointer;
+  color: #dc3545; /* đỏ nhẹ */
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+}
+.dud-logout:hover {
+  color: #b02a37;
+}
