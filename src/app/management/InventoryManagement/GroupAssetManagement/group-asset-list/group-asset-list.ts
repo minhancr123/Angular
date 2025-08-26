@@ -17,10 +17,11 @@ import { SharedModule } from 'src/app/theme/shared/shared.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { GroupingState, PaginatorState, SortState } from 'src/app/_metronic/shared/crud-table';
 import { PaginatorComponent } from 'src/app/_metronic/shared/crud-table/components/paginator/paginator.component';
+import { SearchInput } from 'src/app/shared/components/search-input/search-input';
 
 @Component({
   selector: 'app-group-asset-list',
-  imports: [CommonModule, SharedModule , TranslateModule, MatCardModule, ReactiveFormsModule, MatButtonModule, MatIconModule, MatTableModule, MatInputModule, MatDialogModule , PaginatorComponent],
+  imports: [CommonModule, SearchInput, SharedModule , TranslateModule, MatCardModule, ReactiveFormsModule, MatButtonModule, MatIconModule, MatTableModule, MatInputModule, MatDialogModule , PaginatorComponent],
   templateUrl: './group-asset-list.html',
   styleUrl: './group-asset-list.scss'
 })
@@ -64,6 +65,9 @@ export class GroupAssetList implements OnInit , OnDestroy {
   }
   paginate(paginator: PaginatorState): void {
     this.service.patchState({ paginator });
+  }
+  onSearch(value: any): void {
+    this.service.patchState({ searchTerm: value.target.value });
   }
   create() {
     const dialogRef = this.dialog.open(GroupAssetCreateDialog, {

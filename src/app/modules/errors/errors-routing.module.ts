@@ -14,26 +14,26 @@ const routes: Routes = [
     component: ErrorsComponent,
     children: [
       {
-        path: 'error-1',
+        path: '404',
         component: Error1Component,
       },
       {
-        path: 'error-2',
+        path: '401',
         component: Error2Component,
       },
       {
-        path: 'error-3',
+        path: '403',
         component: Error3Component,
       },
       {
-        path: 'error-4',
+        path: '500',
         component: Error4Component,
       },
       {
         path: 'error-5',
         component: Error5Component,
       },
-      { path: '', redirectTo: 'error-1', pathMatch: 'full' },
+      { path: '', redirectTo: '404', pathMatch: 'full' },
       {
         path: '**',
         component: Error1Component,

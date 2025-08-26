@@ -41,7 +41,7 @@ export class AuthRouteGuard implements CanActivate, CanActivateChild {
       const permissionResult = await this.checkUserPermission(lastSegment, route);
       const isAuthorize = localStorage.getItem("6.2.0-auth-user");
       if (!isAuthorize || !JSON.parse(isAuthorize)) {
-        this.router.navigate(['/error/error-1']);
+        this.router.navigate(['/error/401']);
         console.log("Unauthorized access - redirecting to error page");
         return false; 
       }
@@ -50,10 +50,10 @@ export class AuthRouteGuard implements CanActivate, CanActivateChild {
       if (permissionResult.hasPermission === false)  {
         // ✅ Navigate đến trang lỗi phù hợp
         if (permissionResult.isVisibleIssue) {
-          this.router.navigate(['/error/error-3']); // Unauthorized - không có quyền xem
+          this.router.navigate(['/error/403']); // Unauthorized - không có quyền xem
         } 
         else {
-          this.router.navigate(['/error/error-3']); // Forbidden - không có quyền thực hiện hành động
+          this.router.navigate(['/error/403']); // Forbidden - không có quyền thực hiện hành động
         }
         return false;
       }

@@ -1,9 +1,14 @@
 <app-card [cardTitle]="'Lý do tăng giảm tài sản' | translate">
   <mat-card-title class="mb-3">Danh sách lý do tăng giảm tài sản</mat-card-title>
-  <div class="mb-3 text-end">
+  <div class="row mb-3 align-items-center">
+    <app-search-input
+      [placeholder]="'Tìm kiếm theo tên lý do '"
+      (input)="onSearch($event)"></app-search-input>
+       <div class="col-lg-4 text-end">
     <button mat-flat-button color="primary" (click)="create()" *ngIf="service.Visible">
       Thêm mới
     </button>
+    </div>
   </div>
 
   <table mat-table [dataSource]="service.items$ | async" class="mat-elevation-z2 w-100" matSort>

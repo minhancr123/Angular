@@ -9,6 +9,7 @@ import { SharedModule } from 'src/app/theme/shared/shared.module';
 import { NavGroupComponent } from './nav-group/nav-group.component';
 import { MenuConfigService } from 'src/app/_metronic/core/services/menu-config.service';
 import { MenuServices } from 'src/app/_metronic/core/services/menu.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav-content',
@@ -20,6 +21,7 @@ import { MenuServices } from 'src/app/_metronic/core/services/menu.service';
 export class NavContentComponent implements OnInit {
   private location = inject(Location);
   private menuService = inject(MenuServices);
+
   // public method
   // version
   title = 'Demo application for version numbering';
@@ -51,40 +53,45 @@ export class NavContentComponent implements OnInit {
         
       }
     }
-    this.menuService.layMenuChucNang().subscribe((data) => {
+   this.menuService.layMenuChucNang().subscribe(
+    (data) => {
       console.log("API result:", data);
-    const newMenus: NavigationItem[] = data.data.map(parent => ({
-    id: parent.Code,
-    title: parent.Title,
-    type: "group",
-    icon: parent.Icon || 'icon-group',
-    children: [
-    {
-      id: parent.Code + '_collapse',
-      title: parent.Title,
-      type: "collapse",
-      children: parent.Child.map(child => ({
-        id: child.Code,
-        title: child.Title,
-        icon: child.Icon || 'feather icon-box',
-        type: "item",
-        url: child.ALink || '#'
-      }))
+
+      const newMenus: NavigationItem[] = data.data.map(parent => ({
+        id: parent.Code,
+        title: parent.Title,
+        type: "group",
+        icon: parent.Icon || 'icon-group',
+        children: [
+          {
+            id: parent.Code + '_collapse',
+            title: parent.Title,
+            type: "collapse",
+            children: parent.Child.map(child => ({
+              id: child.Code,
+              title: child.Title,
+              icon: child.Icon || 'feather icon-box',
+              type: "item",
+              url: child.ALink || '#'
+            }))
+          }
+        ]
+      }));
+
+      this.navigations = [...NavigationItems, ApproveMenu, ...newMenus];
+      console.log(this.navigations);
+    },
+    (error) => {
+      console.error("API error:", error);
+      // Chuyển hướng khi API lỗi
+      this.router.navigate(['/error/500']); // đổi '/error' thành route bạn muốn
     }
-  ]
-}));
-
-this.navigations = [...NavigationItems, ApproveMenu, ...newMenus];
-
-
-
-  console.log(this.navigations);
-});
+  );
 
   }
 
   // constructor
-  constructor() {
+  constructor(private router: Router) {
   }
 
   fireOutClick() {

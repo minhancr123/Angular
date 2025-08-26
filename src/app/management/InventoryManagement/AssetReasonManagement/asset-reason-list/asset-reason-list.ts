@@ -16,10 +16,11 @@ import { SharedModule } from 'src/app/theme/shared/shared.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { GroupingState, PaginatorState, SortState } from 'src/app/_metronic/shared/crud-table';
 import { PaginatorComponent } from 'src/app/_metronic/shared/crud-table/components/paginator/paginator.component';
+import { SearchInput } from 'src/app/shared/components/search-input/search-input';
 
 @Component({
   selector: 'app-asset-reason-list',
-  imports: [CommonModule, MatCardModule, SharedModule , TranslateModule, MatTableModule, MatButtonModule, MatIconModule, MatDialogModule, MatChipsModule , PaginatorComponent],
+  imports: [CommonModule, SearchInput, MatCardModule, SharedModule , TranslateModule, MatTableModule, MatButtonModule, MatIconModule, MatDialogModule, MatChipsModule , PaginatorComponent],
   templateUrl: './asset-reason-list.html',
   styleUrl: './asset-reason-list.scss'
 })
@@ -57,7 +58,9 @@ export class AssetReasonList implements OnInit, OnDestroy {
       if (result) this.service.fetch();
     });
   }
-
+  onSearch(value: any): void {
+    this.service.patchState({ searchTerm: value.target.value });
+  }
   edit(item: AssetReasonModel) {
     const dialogRef = this.dialog.open(AssetReasonEditDialog, {
       width: '600px',
