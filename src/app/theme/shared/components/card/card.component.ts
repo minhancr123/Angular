@@ -12,6 +12,7 @@ import { NgbDropdownConfig, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.scss'],
   providers: [NgbDropdownConfig],
+  standalone: true,
   animations: [
     trigger('collapsedCard', [
       state(

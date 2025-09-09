@@ -42,7 +42,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatProgressSpinnerModule
   ],
   templateUrl: './origin-list.html',
-  styleUrl: './origin-list.scss'
+  styleUrl: './origin-list.scss',
+  standalone: true
 })
 export class OriginList {
 paginator: PaginatorState;

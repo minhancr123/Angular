@@ -39,7 +39,8 @@ import { GroupingState } from 'src/app/_metronic/shared/crud-table/grouping.mode
     SortIconComponent
   ],
   templateUrl: './brand-list.html',
-  styleUrl: './brand-list.scss'
+  styleUrl: './brand-list.scss',
+  standalone: true
 })
 export class BrandList {
   paginator: PaginatorState;

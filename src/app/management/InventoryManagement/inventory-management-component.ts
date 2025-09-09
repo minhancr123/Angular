@@ -5,7 +5,8 @@ import { RouterModule } from '@angular/router';
   selector: 'app-inventory-management-component',
   imports: [RouterModule],
   templateUrl: './inventory-management-component.html',
-  styleUrl: './inventory-management-component.scss'
+  styleUrl: './inventory-management-component.scss',
+  standalone: true
 })
 export class InventoryManagementComponent {
 

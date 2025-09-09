@@ -9,7 +9,8 @@ import { MatInputModule } from '@angular/material/input';
   selector: 'app-loai-mat-hang-edit',
   imports: [MatFormFieldModule ,ReactiveFormsModule ,MatDialogModule , MatInputModule , MatButtonModule ],
   templateUrl: './loai-mat-hang-edit.html',
-  styleUrl: './loai-mat-hang-edit.scss'
+  styleUrl: './loai-mat-hang-edit.scss',
+  standalone: true
 })
 export class LoaiMatHangEdit {
 form: FormGroup;

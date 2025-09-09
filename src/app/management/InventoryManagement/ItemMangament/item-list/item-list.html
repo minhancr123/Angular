@@ -1,19 +1,34 @@
-<mat-card class="card container mt-4">
+<mat-card class="card container mt-4 inventory-table-responsive">
 <!-- Thêm form tìm kiếm -->
  <!-- <div class="card-title mt-2">
       <span class="card-table">Mặt hàng</span>
     </div> -->
-    <mat-card-header class="card-header d-flex justify-content-between align-items-center gap-2">
-      <h5 class="card-title mb-0 me-auto">Danh sách mặt hàng</h5>
-      <button mat-raised-button color="primary" (click)="create()" *ngIf="mathangService.Visible">Thêm mới</button>
-      <button mat-raised-button color="accent" (click)="importExcel()" *ngIf="mathangService.Visible" >Import dữ liệu Excel</button>&nbsp;
-      <button mat-raised-button color="warn" (click)="exportExcel()" *ngIf="mathangService.Visible" [disabled]="this.matHangList.data.length === 0">Xuất dữ liệu Excel</button>
-    </mat-card-header>
+   <mat-card-header class="card-header d-flex justify-content-between align-items-center inventory-card-header item-list-header">
+  <!-- Tiêu đề -->
+  <h5 class="card-title mb-0 inventory-card-title">Danh sách mặt hàng</h5>
+
+  <!-- Nhóm nút hành động -->
+ <div class="d-flex gap-2">
+    <button mat-raised-button color="primary" (click)="create()" *ngIf="mathangService.Visible" class="btn-responsive">
+      Thêm mới
+    </button>
+    <button mat-raised-button color="accent" (click)="importExcel()" *ngIf="mathangService.Visible" class="btn-responsive">
+      Import Excel
+    </button>
+    <button mat-raised-button color="warn"
+            (click)="exportExcel()"
+            [disabled]="matHangList.data.length === 0"
+            *ngIf="mathangService.Visible" class="btn-responsive">
+      Xuất Excel
+    </button>
+  </div>
+</mat-card-header>
+
 <div class="row mb-3">
   <div class="col-12">
     <form [formGroup]="searchForm" class="row g-3">
       <!-- Tìm kiếm tất cả -->
-      <div class="col-md-4">
+      <div class="col-md-4 col-sm-6 col-12">
         <mat-form-field appearance="outline" class="w-100">
           <mat-label>Tìm kiếm</mat-label>
           <input matInput placeholder="Tìm kiếm theo mã, tên mặt hàng..." formControlName="searchTerm">
@@ -22,7 +37,7 @@
       </div>
 
       <!-- Lọc theo đơn vị tính -->
-      <div class="col-md-4">
+      <div class="col-md-4 col-sm-6 col-12">
         <mat-form-field appearance="outline" class="w-100">
           <mat-label>Đơn vị tính</mat-label>
           <mat-select formControlName="donViTinh">
@@ -35,7 +50,7 @@
       </div>
 
       <!-- Lọc theo loại mặt hàng -->
-      <div class="col-md-4">
+      <div class="col-md-4 col-sm-6 col-12">
         <mat-form-field appearance="outline" class="w-100">
           <mat-label>Loại mặt hàng</mat-label>
           <mat-select formControlName="loaiMatHang">
@@ -52,56 +67,54 @@
 </div>
 
 <!-- Action Buttons -->
-<div class="mb-3 d-flex align-items-center justify-content-between flex-wrap gap-2">
-  <div>
-    <button mat-raised-button color="warn" [disabled]="!hasCheckedItem" *ngIf="mathangService.Visible" (click)="deleteSelected()">Xóa mặt hàng</button>
-    <span class="ms-2">Số lượng đã chọn: {{ selectedItems.length }}</span>
-  </div>
-  <div>
-    
-    <!-- <button mat-raised-button color="accent" (click)="importExcel()">📥 Import dữ liệu</button> -->
+<div class="mb-3 d-flex align-items-center justify-content-between flex-wrap gap-2 inventory-search-controls">
+  <div class="d-flex align-items-center gap-2">
+    <button mat-raised-button color="warn" [disabled]="!hasCheckedItem" *ngIf="mathangService.Visible" (click)="deleteSelected()" class="btn-responsive">
+      Xóa mặt hàng
+    </button>
+    <span class="text-muted">Số lượng đã chọn: {{ selectedItems.length }}</span>
   </div>
 </div>
 
 <!-- Danh sách mặt hàng -->
- <div class="card-body">
-<div class="table-responsive angular-bootstrap-table" >
-  <table mat-table [dataSource]="matHangList" class="table">
+ <div class="card-body inventory-card-content">
+<div class="table-responsive angular-bootstrap-table inventory-table-responsive">
+  <table mat-table [dataSource]="matHangList" class="table table-sm">
 
     <!-- Checkbox -->
     <ng-container matColumnDef="select">
-      <th mat-header-cell *matHeaderCellDef>
+      <th mat-header-cell class="text-nowrap" *matHeaderCellDef>
         <mat-checkbox (change)="toggleAll($event)" [checked]="isAllSelected()"></mat-checkbox>
       </th>
-      <td mat-cell *matCellDef="let row">
+      <td mat-cell class="text-break" *matCellDef="let row">
         <mat-checkbox (change)="toggleSelection(row)" [checked]="isSelected(row)"></mat-checkbox>
       </td>
     </ng-container>
 
     <!-- STT -->
     <ng-container matColumnDef="stt">
-      <th mat-header-cell *matHeaderCellDef>#</th>
-      <td mat-cell *matCellDef="let row; let i = index">{{ i + 1 }}</td>
+      <th mat-header-cell class="text-nowrap" *matHeaderCellDef>#</th>
+      <td mat-cell class="text-break" *matCellDef="let row; let i = index">{{ i + 1 }}</td>
     </ng-container>
 
     <!-- Mã hàng -->
     <ng-container matColumnDef="maHang">
-      <th mat-header-cell *matHeaderCellDef>Mã hàng</th>
-      <td mat-cell *matCellDef="let row">
+      <th mat-header-cell class="text-nowrap" *matHeaderCellDef>Mã hàng</th>
+      <td mat-cell class="text-break" *matCellDef="let row">
         <a class="text-primary" style="cursor: pointer;" (click)="viewDetail(row)">{{ row.MaHang }}</a>
       </td>
     </ng-container>
 
     <!-- Tên mặt hàng -->
     <ng-container matColumnDef="tenMatHang">
-      <th mat-header-cell *matHeaderCellDef>Tên mặt hàng</th>
-      <td mat-cell *matCellDef="let row">{{ row.TenMatHang }}</td>
+      <th mat-header-cell class="text-nowrap" *matHeaderCellDef>Tên mặt hàng</th>
+      <td mat-cell class="text-break" *matCellDef="let row">{{ row.TenMatHang }}</td>
     </ng-container>
 
     <!-- Hình ảnh -->
     <ng-container matColumnDef="hinhAnh">
-      <th mat-header-cell *matHeaderCellDef>Hình ảnh</th>
-      <td mat-cell *matCellDef="let row">
+      <th mat-header-cell class="text-nowrap" *matHeaderCellDef>Hình ảnh</th>
+      <td mat-cell class="text-break" *matCellDef="let row">
         <div class="image-cell">
           <img *ngIf="row.HinhAnh" [src]="row.HinhAnh" [alt]="row.TenMatHang" 
                class="thumbnail-image" (click)="viewDetail(row)" />
@@ -114,32 +127,31 @@
 
     <!-- Số kỳ tính khấu hao tối thiểu -->
     <ng-container matColumnDef="soKyMin">
-      <th mat-header-cell *matHeaderCellDef>Số kỳ tính khấu hao tối thiểu</th>
-      <td mat-cell *matCellDef="let row">{{ row.SoKyTinhKhauHaoToiThieu }}</td>
+      <th mat-header-cell class="text-nowrap" *matHeaderCellDef>Số kỳ tính khấu hao tối thiểu</th>
+      <td mat-cell class="text-break" *matCellDef="let row">{{ row.SoKyTinhKhauHaoToiThieu }}</td>
     </ng-container>
 
     <!-- Số kỳ tính khấu hao tối đa -->
     <ng-container matColumnDef="soKyMax">
-      <th mat-header-cell *matHeaderCellDef>Số kỳ tính khấu hao tối đa</th>
-      <td mat-cell *matCellDef="let row">{{ row.SoKyTinhKhauHaoToiDa }}</td>
+      <th mat-header-cell class="text-nowrap" *matHeaderCellDef>Số kỳ tính khấu hao tối đa</th>
+      <td mat-cell class="text-break" *matCellDef="let row">{{ row.SoKyTinhKhauHaoToiDa }}</td>
     </ng-container>
 
     <!-- Thao tác -->
     <ng-container matColumnDef="actions">
-      <th mat-header-cell *matHeaderCellDef >Thao tác</th>
-      <td mat-cell *matCellDef="let row" >
-        <button mat-icon-button color="primary" (click)="edit(row)" *ngIf="mathangService.Visible">
-          <mat-icon>edit</mat-icon>
+      <th mat-header-cell class="text-nowrap" *matHeaderCellDef >Thao tác</th>
+      <td mat-cell class="text-break" *matCellDef="let row" >
+        <button mat-icon-button color="primary" (click)="edit(row)" *ngIf="mathangService.Visible" matTooltip="Chỉnh sửa"><mat-icon class="small-icon">edit</mat-icon>
         </button>
-        <button mat-icon-button color="warn" (click)="delete(row)" *ngIf="mathangService.Visible">
-          <mat-icon>delete</mat-icon>
+        <button mat-icon-button color="warn" (click)="delete(row)" *ngIf="mathangService.Visible" matTooltip="Xóa"><mat-icon class="small-icon">delete</mat-icon>
         </button>
       </td>
     </ng-container>
 
     <!-- Rows -->
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+   <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="table-row-hover"></tr>
+
   </table>
 </div>
 <!-- Paginator -->

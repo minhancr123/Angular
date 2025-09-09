@@ -18,7 +18,8 @@ import { DVTService } from 'src/app/management/Services/DVT-management.service';
     MatInputModule,
     MatButtonModule],
   templateUrl: './dvtedit-dialog.html',
-  styleUrl: './dvtedit-dialog.scss'
+  styleUrl: './dvtedit-dialog.scss',
+  standalone: true
 })
 export class DVTEditDialog {
     form: FormGroup;

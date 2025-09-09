@@ -20,7 +20,8 @@ import { ReasonAssetService } from 'src/app/management/Services/assetReason-mana
     MatSelectModule,
     MatCheckboxModule],
   templateUrl: './asset-reason-edit-dialog.html',
-  styleUrl: './asset-reason-edit-dialog.scss'
+  styleUrl: './asset-reason-edit-dialog.scss',
+  standalone: true
 })
 export class AssetReasonEditDialog {
     form: FormGroup;

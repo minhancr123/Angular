@@ -133,7 +133,8 @@ export class NgPaginationPrevious {
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: { 'role': 'navigation' },
   templateUrl: './ng-pagination.component.html',
-  imports :[CommonModule]
+  imports :[CommonModule],
+  standalone: true
 })
 export class NgPagination implements OnChanges {
   pageCount = 0;

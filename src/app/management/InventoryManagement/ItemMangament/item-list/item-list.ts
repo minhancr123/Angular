@@ -33,7 +33,8 @@ import * as FileSaver from 'file-saver';
   imports: [MatTableModule , ReactiveFormsModule,SharedModule, TranslateModule, PaginatorComponent ,MatIconModule , MatCheckboxModule , MatFormFieldModule , MatSelectModule , MatOptionModule ,MatCardHeader , MatCardModule, MatButtonModule , MatInputModule , CommonModule],
   templateUrl: './item-list.html',
   styleUrl: './item-list.scss',
-  providers: [DVTService, MatHangService , LoaiMatHangService , LayoutUtilsService]
+  providers: [DVTService, MatHangService , LoaiMatHangService , LayoutUtilsService],
+  standalone: true
 })
 export class ItemList implements OnInit {
 displayedColumns: string[] = ['select', 'stt', 'maHang', 'tenMatHang', 'hinhAnh', 'soKyMin', 'soKyMax', 'actions'];
@@ -93,6 +94,10 @@ private initSearchForm() {
  importExcel(){
       this.dialog.open(ItemImport, {
         width: '600px',
+      });
+
+      this.dialog.afterAllClosed.subscribe(() => {
+        this.mathangService.fetch(); // Tải lại danh sách sau khi đóng dialog
       });
     }
     private applySearch() {
@@ -205,10 +210,11 @@ this.router.navigate(['edit', item.IdMH], { relativeTo: this.route });
   delete(row : MatHang) {
     console.log('Deleting item:', row);
      const selectedCount = this.selectedItems.length;
+     const itemName = row.TenMatHang;
   const title = 'Xác nhận xoá';
-  const description = `Bạn có chắc muốn xoá ${selectedCount} mặt hàng đã chọn không?`;
+  const description = `Bạn có chắc muốn xoá mặt hàng ${itemName}?`;
   const waitDesciption = 'Đang xoá dữ liệu...';
-  const deleteMessage = `Đã xoá thành công ${selectedCount} mặt hàng`;
+  const deleteMessage = `Đã xoá thành công mặt hàng ${itemName}`;
 
   const dialogRef = this.layoutUtilsService.deleteElement(
     title,

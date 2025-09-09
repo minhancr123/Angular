@@ -7,15 +7,15 @@
         <mat-icon>save</mat-icon> Lưu
       </button>
       <button mat-raised-button color="accent" class="me-2" (click)="onReset()">Đặt lại</button>
-      <button mat-button (click)="onBack()">← Trở lại</button>
+      <button  mat-raised-button (click)="onBack()">← Trở lại</button>
     </div>
   </mat-card-header>
 
-  <mat-card-content>
+  <mat-card-content class="inventory-card-content">
     <form [formGroup]="form">
       <!-- Form thông tin cơ bản cho tab đầu tiên -->
       <div class="row mb-4">
-        <div class="col-md-6">
+        <div class="col-md-6 col-12">
           <mat-form-field appearance="fill" class="w-100">
             <mat-label>Mã hàng *</mat-label>
             <input matInput formControlName="maHang" />
@@ -24,7 +24,7 @@
             </mat-error>
           </mat-form-field>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6 col-12">
           <mat-form-field appearance="fill" class="w-100">
             <mat-label>Tên mặt hàng *</mat-label>
             <input matInput formControlName="tenMatHang" />
@@ -39,9 +39,9 @@
       <!-- Tabs -->
       <mat-tab-group>
         <mat-tab label="Thông tin cơ bản">
-          <div class="row mt-3">
+          <div class="row mt-3 inventory-pagination-responsive">
             <!-- Cột trái -->
-            <div class="col-md-4">
+            <div class="col-md-4 col-sm-6 col-12">
               <mat-form-field appearance="fill" class="w-100 mb-3">
                 <mat-label>Loại mặt hàng</mat-label>
                 <mat-select formControlName="idLMH">
@@ -84,7 +84,7 @@
             </div>
 
             <!-- Cột giữa -->
-            <div class="col-md-4">
+            <div class="col-md-4 col-sm-6 col-12">
               <mat-form-field appearance="fill" class="w-100 mb-3">
                 <mat-label>Đơn vị tính</mat-label>
                <mat-select formControlName="donViTinh">
@@ -125,7 +125,7 @@
             </div>
 
             <!-- Cột phải -->
-            <div class="col-md-4">
+            <div class="col-md-4 col-sm-6 col-12">
               <mat-form-field appearance="fill" class="w-100 mb-3">
                 <mat-label>Số kỳ khấu hao tối thiểu</mat-label>
                 <input matInput formControlName="soKyKhauHaoToiThieu" type="number" />
@@ -166,7 +166,7 @@
         <!-- Các tab khác -->
         <mat-tab label="Thông tin phụ"></mat-tab>
         <mat-tab label="Hình ảnh chính">
-          <div class="mt-3">
+          <div class="mt-3 inventory-pagination-responsive">
             <!-- Chọn mặt hàng để thêm hình ảnh -->
             <div class="row mb-4">
               <div class="col-12">
@@ -186,18 +186,18 @@
             <div *ngIf="selectedMatHang" class="row mb-4">
               <div class="col-12">
                 <div class="card border-info">
-                  <div class="card-body">
+                  <div class="card-body inventory-card-content">
                     <h6 class="card-title text-info">Thông tin mặt hàng đã chọn:</h6>
                     <div class="row">
-                      <div class="col-md-4">
+                      <div class="col-md-4 col-sm-6 col-12">
                         <p><strong>Mã hàng:</strong> {{ selectedMatHang.MaHang }}</p>
                         <p><strong>Tên mặt hàng:</strong> {{ selectedMatHang.TenMatHang }}</p>
                       </div>
-                      <div class="col-md-4">
+                      <div class="col-md-4 col-sm-6 col-12">
                         <p><strong>Giá mua:</strong> {{ selectedMatHang.GiaMua | currency:'VND' }}</p>
                         <p><strong>Giá bán:</strong> {{ selectedMatHang.GiaBan | currency:'VND' }}</p>
                       </div>
-                      <div class="col-md-4">
+                      <div class="col-md-4 col-sm-6 col-12">
                         <div *ngIf="selectedMatHang.HinhAnh">
                           <p><strong>Hình ảnh hiện tại:</strong></p>
                           <img [src]="selectedMatHang.HinhAnh" alt="Current Image" style="max-width: 100px; border: 1px solid #ddd; border-radius: 4px;" />
@@ -217,14 +217,14 @@
                 <input type="file" (change)="onFileSelected($event)" accept="image/*" class="form-control mb-3" />
                 
                 <!-- Hiển thị preview ảnh -->
-                <div *ngIf="previewUrl" class="mt-2 d-flex gap-2 align-items-center">
+                <div *ngIf="previewUrl" class="mt-2 d-flex gap-2 flex-wrap align-items-center">
                   <img [src]="previewUrl" alt="Preview" style="max-width: 200px; border: 1px solid #ddd; border-radius: 4px;" />
                   <button mat-raised-button color="primary" (click)="onUploadImage()" [disabled]="!selectedMatHang">
                     <mat-icon>cloud_upload</mat-icon> Lưu hình ảnh
                   </button>
                 </div>
                 
-                <div *ngIf="!selectedMatHang" class="alert alert-info mt-3">
+                <div *ngIf="!selectedMatHang" class="alert alert-info mt-3 inventory-pagination-responsive">
                   Vui lòng chọn mặt hàng trước khi tải lên hình ảnh.
                 </div>
               </div>

@@ -1,107 +1,114 @@
-<app-card [cardTitle]="'Loại mặt hàng' | translate">
+<app-card  [cardTitle]="'Loại mặt hàng' | translate" class="inventory-table-responsive">
   <!-- Header -->
-  <div class="card-header d-flex justify-content-between align-items-center flex-wrap">
+  <div class="card-header d-flex justify-content-between align-items-center flex-wrap  inventory-card-header">
     <div class="card-title">
       <span class="card-table">Danh sách loại mặt hàng</span>
     </div>
-    <div class="card-toolbar">
-      <button mat-raised-button color="primary" (click)="create()" *ngIf="loaiMatHangService.Visible">Thêm mới</button>&nbsp;
-      <button mat-raised-button color="accent" (click)="exportExcel()" *ngIf="loaiMatHangService.Visible">Xuất Excel</button>&nbsp;
-      <button mat-raised-button (click)="toggleFilter()" *ngIf="loaiMatHangService.Visible">Bộ lọc</button>
+    <div class="card-toolbar d-flex flex-wrap gap-2">
+      <button mat-raised-button color="primary" (click)="create()" *ngIf="loaiMatHangService.Visible" class="btn-responsive">Thêm mới</button>
+      <button mat-raised-button color="accent" (click)="exportExcel()" *ngIf="loaiMatHangService.Visible" class="btn-responsive">Xuất Excel</button>
+      <button mat-raised-button (click)="toggleFilter()" *ngIf="loaiMatHangService.Visible" class="btn-responsive">Bộ lọc</button>
     </div>
   </div>
 
   <!-- Body -->
-  <div class="card-body">
+  <div class="card-body inventory-card-content inventory-card-content">
     <!-- Search -->
-    <form [formGroup]="searchGroup" class="form-group row mb-5">
-      <div class="col-lg-4">
-        <input matInput type="text" class="form-control" placeholder="Tìm kiếm loại mặt hàng"
-               formControlName="searchTerm" />
+    <form [formGroup]="searchGroup" class="form-group mb-4 inventory-form-responsive">
+      <div class="row">
+        <div class="col-lg-4 col-md-6 col-12 col-md-6 col-12 col-12">
+          <input matInput type="text" class="form-control" placeholder="Tìm kiếm loại mặt hàng"
+                 formControlName="searchTerm" />
+        </div>
       </div>
       <div class="row mb-3" *ngIf="showFilter" [formGroup]="searchGroup">
-      <div class="col-md-3">
-        <mat-form-field appearance="fill" class="w-100">
-          <mat-label>Tên loại mặt hàng</mat-label>
-          <input matInput formControlName="tenLoai">
-        </mat-form-field>
+        <div class="col-md-3 col-sm-6 col-12 col-sm-6 col-12">
+          <mat-form-field appearance="fill" class="w-100">
+            <mat-label>Tên loại mặt hàng</mat-label>
+            <input matInput formControlName="tenLoai">
+          </mat-form-field>
+        </div>
+        <div class="col-md-3 col-sm-6 col-12 col-sm-6 col-12">
+          <mat-form-field appearance="fill" class="w-100">
+            <mat-label>Loại mặt hàng cha</mat-label>
+            <input matInput formControlName="idLMHParent">
+          </mat-form-field>
+        </div>
+        <div class="col-md-3 col-sm-6 col-12 col-sm-6 col-12">
+          <mat-form-field appearance="fill" class="w-100">
+            <mat-label>Độ ưu tiên</mat-label>
+            <input matInput formControlName="doUuTien">
+          </mat-form-field>
+        </div>
       </div>
-      <div class="col-md-3">
-        <mat-form-field appearance="fill" class="w-100">
-          <mat-label>Loại mặt hàng cha</mat-label>
-          <input matInput formControlName="idLMHParent">
-        </mat-form-field>
-      </div>
-      <div class="col-md-3">
-        <mat-form-field appearance="fill" class="w-100">
-          <mat-label>Độ ưu tiên</mat-label>
-          <input matInput formControlName="doUuTien">
-        </mat-form-field>
-      </div>
-    </div>
-
     </form>
 
        <!-- Table -->
     <div class="table-responsive angular-bootstrap-table">
-      <table mat-table [dataSource]="loaiMatHangService.item$ | async" class="table">
+      <table table-sm mat-table table-sm [dataSource]="loaiMatHangService.item$ | async" class="table table-sm table-sm">
 
         <!-- STT -->
         <ng-container matColumnDef="stt">
-          <th mat-header-cell *matHeaderCellDef>#</th>
-          <td mat-cell *matCellDef="let row; let i = index">{{ i + 1 }}</td>
+          <th mat-header-cell class="text-nowrap" *matHeaderCellDef class="text-nowrap">#</th>
+          <td mat-cell class="text-break" *matCellDef="let row; let i = index">{{ i + 1 }}</td>
         </ng-container>
 
         <!-- Tên loại mặt hàng -->
         <ng-container matColumnDef="tenLoai">
-          <th mat-header-cell *matHeaderCellDef>Tên loại mặt hàng</th>
-          <td mat-cell *matCellDef="let row">
-            <a class="text-primary fw-semibold" style="cursor: pointer;">{{ row.TenLMH }}</a>
+          <th mat-header-cell class="text-nowrap" *matHeaderCellDef class="text-nowrap">Tên loại mặt hàng</th>
+          <td mat-cell class="text-break" *matCellDef="let row">
+            <a class="text-primary fw-semibold text-break" style="cursor: pointer;">{{ row.TenLMH }}</a>
           </td>
         </ng-container>
 
         <!-- Loại mặt hàng cha -->
         <ng-container matColumnDef="loaiCha">
-          <th mat-header-cell *matHeaderCellDef>Loại mặt hàng cha</th>
-          <td mat-cell *matCellDef="let row">{{ row.IdLMHParent }}</td>
+          <th mat-header-cell class="text-nowrap" *matHeaderCellDef class="text-nowrap">Loại mặt hàng cha</th>
+          <td mat-cell class="text-break" *matCellDef="let row" class="text-break">{{ row.IdLMHParent }}</td>
         </ng-container>
 
         <!-- Độ ưu tiên -->
         <ng-container matColumnDef="doUuTien">
-          <th mat-header-cell *matHeaderCellDef>Độ ưu tiên</th>
-          <td mat-cell *matCellDef="let row">{{ row.DoUuTien }}</td>
+          <th mat-header-cell class="text-nowrap" *matHeaderCellDef class="text-nowrap">Độ ưu tiên</th>
+          <td mat-cell class="text-break" *matCellDef="let row">{{ row.DoUuTien }}</td>
         </ng-container>
 
         <!-- Mô tả -->
         <ng-container matColumnDef="moTa">
-          <th mat-header-cell *matHeaderCellDef>Mô tả</th>
-          <td mat-cell *matCellDef="let row">{{ row.Mota }}</td>
+          <th mat-header-cell class="text-nowrap" *matHeaderCellDef class="text-nowrap d-none d-lg-table-cell">Mô tả</th>
+          <td mat-cell class="text-break" *matCellDef="let row" class="text-break d-none d-lg-table-cell">{{ row.Mota }}</td>
         </ng-container>
 
         <!-- Thao tác -->
         <ng-container matColumnDef="thaotac">
-          <th mat-header-cell *matHeaderCellDef class="text-center">Thao tác</th>
-          <td mat-cell *matCellDef="let row" class="text-center">
-            <button mat-icon-button color="primary" (click)="edit(row)" *ngIf="loaiMatHangService.Visible">
-              <mat-icon>edit</mat-icon>
-            </button>
-            <button mat-icon-button color="warn" (click)="delete(row)" *ngIf="loaiMatHangService.Visible">
-              <mat-icon>delete</mat-icon>
-            </button>
+          <th mat-header-cell class="text-nowrap" *matHeaderCellDef class="text-center text-nowrap">Thao tác</th>
+          <td mat-cell class="text-break" *matCellDef="let row" class="text-center">
+            <div class="btn-group btn-group-sm d-flex flex-column flex-sm-row gap-1">
+              <button mat-icon-button color="primary" (click)="edit(row)" *ngIf="loaiMatHangService.Visible" 
+                      class="btn-sm" matTooltip="Chỉnh sửa" matTooltip="Chỉnh sửa">
+                <mat-icon class="small-icon">edit</mat-icon>
+              </button>
+              <button mat-icon-button color="warn" (click)="delete(row)" *ngIf="loaiMatHangService.Visible" 
+                      class="btn-sm" matTooltip="Xóa" matTooltip="Xóa">
+                <mat-icon class="small-icon">delete</mat-icon>
+              </button>
+            </div>
           </td>
         </ng-container>
 
         <!-- Rows -->
         <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="table-row-hover" ></tr>
       </table>
     </div>
 
     <!-- Paginator -->
-    <app-paginator
-      [paginator]="paginator"
-      [isLoading]="isLoading"
-      (paginate)="paginate($event)">
-    </app-paginator>
+    <div class="inventory-pagination-responsive">
+      <app-paginator
+        [paginator]="paginator"
+        [isLoading]="isLoading"
+        (paginate)="paginate($event)">
+      </app-paginator>
+    </div>
   </div>
 </app-card>

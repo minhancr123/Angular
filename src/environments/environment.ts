@@ -7,7 +7,7 @@ import packageInfo from '../../package.json';
 export const environment = {
   appVersion: packageInfo.version,
   production: true,
-   ApiRoot: 'http://localhost:8080/api',
+   ApiRoot: 'https://localhost:7277/api',
   USERDATA_KEY: 'auth-user'
 };
 /*

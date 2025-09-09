@@ -18,7 +18,8 @@ import { XuatXuService } from 'src/app/management/Services/origin-management.ser
     MatFormFieldModule,
     MatInputModule],
   templateUrl: './origin-edit-dialog.html',
-  styleUrl: './origin-edit-dialog.scss'
+  styleUrl: './origin-edit-dialog.scss',
+  standalone: true
 })
 export class OriginEditDialog {
 editForm: FormGroup;

@@ -22,7 +22,8 @@ import { MatIconModule } from '@angular/material/icon';
     MatIconModule
   ],
   templateUrl: './insurance-partner-create-dialog.html',
-  styleUrl: './insurance-partner-create-dialog.scss'
+  styleUrl: './insurance-partner-create-dialog.scss',
+  standalone: true
 })
 export class InsurancePartnerCreateDialog {
 form: FormGroup;

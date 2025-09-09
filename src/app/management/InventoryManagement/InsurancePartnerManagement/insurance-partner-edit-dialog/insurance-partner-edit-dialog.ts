@@ -22,7 +22,8 @@ import { InsurancePartnerService } from 'src/app/management/Services/insurancePa
     MatIconModule
   ],
   templateUrl: './insurance-partner-edit-dialog.html',
-  styleUrl: './insurance-partner-edit-dialog.scss'
+  styleUrl: './insurance-partner-edit-dialog.scss',
+  standalone: true
 })
 export class InsurancePartnerEditDialog {
   form: FormGroup;

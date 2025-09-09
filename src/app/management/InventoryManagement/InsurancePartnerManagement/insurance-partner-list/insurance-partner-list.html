@@ -1,22 +1,22 @@
 <div class="card">
-  <div class="card-header d-flex justify-content-between align-items-center flex-wrap">
+  <div class="card-header d-flex justify-content-between align-items-center flex-wrap inventory-card-header flex-wrap">
     <!-- <div class="card-title">Danh sách đơn vị bảo hiểm</div> -->
-     <h5 class="card-title">Danh sách đơn vị</h5>
-    <div class="card-toolbar">
+     <h5 class="card-title col-8">Danh sách đơn vị</h5>
+    <div class="card-toolbar col-4 text-end">
       <button mat-raised-button color="primary" (click)="create()" *ngIf="service.Visible">Thêm mới</button>
       <!-- <button mat-raised-button (click)="toggleFilter()">Bộ lọc</button> -->
     </div>
   </div>
 
-  <div class="card-body">
+  <div class="card-body inventory-card-content">
     <form [formGroup]="searchGroup" class="row mb-3">
-      <div class="col-md-4">
+      <div class="col-md-4 col-sm-6 col-12">
         <mat-form-field appearance="outline" class="w-100">
           <mat-label>Tên đơn vị</mat-label>
           <input matInput formControlName="tenDonVi"  />
         </mat-form-field>
       </div>
-      <div class="col-md-4" *ngIf="showFilter">
+      <div class="col-md-4 col-sm-6 col-12" *ngIf="showFilter">
         <mat-form-field appearance="fill" class="w-100">
           <mat-label>Địa chỉ</mat-label>
           <input matInput formControlName="diaChi" />
@@ -25,51 +25,50 @@
     </form>
 
     <div class="table-responsive">
-      <table mat-table [dataSource]="service.items$ | async" class="table ">
+      <table table-sm mat-table table-sm [dataSource]="service.items$ | async" class="table table-sm ">
         <ng-container matColumnDef="stt">
-          <th mat-header-cell *matHeaderCellDef>#</th>
-          <td mat-cell *matCellDef="let row; let i = index">{{ i + 1 }}</td>
+          <th mat-header-cell class="text-nowrap" *matHeaderCellDef>#</th>
+          <td mat-cell class="text-break" *matCellDef="let row; let i = index">{{ i + 1 }}</td>
         </ng-container>
         
         <ng-container matColumnDef="tenDonVi">
-          <th mat-header-cell *matHeaderCellDef>Tên đơn vị</th>
-          <td mat-cell *matCellDef="let row">{{ row.TenDonVi }}</td>
+          <th mat-header-cell class="text-nowrap" *matHeaderCellDef>Tên đơn vị</th>
+          <td mat-cell class="text-break" *matCellDef="let row">{{ row.TenDonVi }}</td>
         </ng-container>
         
         <ng-container matColumnDef="diaChi">
-          <th mat-header-cell *matHeaderCellDef>Địa chỉ</th>
-          <td mat-cell *matCellDef="let row">{{ row.DiaChi }}</td>
+          <th mat-header-cell class="text-nowrap" *matHeaderCellDef>Địa chỉ</th>
+          <td mat-cell class="text-break" *matCellDef="let row">{{ row.DiaChi }}</td>
         </ng-container>
         
         <ng-container matColumnDef="soDT">
-          <th mat-header-cell *matHeaderCellDef>Điện thoại</th>
-          <td mat-cell *matCellDef="let row">{{ row.SoDT }}</td>
+          <th mat-header-cell class="text-nowrap" *matHeaderCellDef>Điện thoại</th>
+          <td mat-cell class="text-break" *matCellDef="let row">{{ row.SoDT }}</td>
         </ng-container>
         
         <ng-container matColumnDef="nguoiLienHe">
-          <th mat-header-cell *matHeaderCellDef>Người liên hệ</th>
-          <td mat-cell *matCellDef="let row">{{ row.NguoiLienHe }}</td>
+          <th mat-header-cell class="text-nowrap" *matHeaderCellDef>Người liên hệ</th>
+          <td mat-cell class="text-break" *matCellDef="let row">{{ row.NguoiLienHe }}</td>
         </ng-container>
         
         <ng-container matColumnDef="ghiChu">
-          <th mat-header-cell *matHeaderCellDef>Ghi chú</th>
-          <td mat-cell *matCellDef="let row">{{ row.GhiChu }}</td>
+          <th mat-header-cell class="text-nowrap" *matHeaderCellDef>Ghi chú</th>
+          <td mat-cell class="text-break" *matCellDef="let row">{{ row.GhiChu }}</td>
         </ng-container>
         
         <ng-container matColumnDef="thaotac">
-          <th mat-header-cell *matHeaderCellDef>Thao tác</th>
-          <td mat-cell *matCellDef="let row">
-            <button mat-icon-button color="primary" (click)="edit(row)" *ngIf="service.Visible">
-              <mat-icon>edit</mat-icon>
+          <th mat-header-cell class="text-nowrap" *matHeaderCellDef>Thao tác</th>
+          <td mat-cell class="text-break" *matCellDef="let row">
+            <button mat-icon-button color="primary" (click)="edit(row)" *ngIf="service.Visible" matTooltip="Chỉnh sửa"><mat-icon class="small-icon">edit</mat-icon>
             </button>
-            <button mat-icon-button color="warn" (click)="delete(row)" *ngIf="service.Visible">
-              <mat-icon>delete</mat-icon>
+            <button mat-icon-button color="warn" (click)="delete(row)" *ngIf="service.Visible" matTooltip="Xóa"><mat-icon class="small-icon">delete</mat-icon>
             </button>
           </td>
         </ng-container>
         
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="table-row-hover"></tr>
+
       </table>
     </div>
   </div>

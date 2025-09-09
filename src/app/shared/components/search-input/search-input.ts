@@ -7,7 +7,8 @@ import { MatInputModule } from '@angular/material/input';
   selector: 'app-search-input',
   imports: [ MatFormFieldModule , MatInputModule],
   templateUrl: './search-input.html',
-  styleUrl: './search-input.scss'
+  styleUrl: './search-input.scss',
+  standalone: true
 })
 export class SearchInput {
   @Input() placeholder: string = 'Tìm kiếm...';

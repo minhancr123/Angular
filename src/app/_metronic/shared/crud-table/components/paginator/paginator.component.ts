@@ -10,7 +10,8 @@ import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
   selector: 'app-paginator',
   templateUrl: './paginator.component.html',
   styleUrls: ['./paginator.component.scss'],
-  imports : [NgPagination , FormsModule  , CommonModule, NgbPaginationModule]
+  imports : [NgPagination , FormsModule  , CommonModule, NgbPaginationModule],
+  standalone: true
 })
 export class  PaginatorComponent implements OnInit {
   @Input() paginator: PaginatorState;

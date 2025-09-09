@@ -16,7 +16,8 @@ import { LayoutUtilsService, MessageType } from 'src/app/_core/utils/layout-util
   selector: 'app-group-asset-create-dialog',
   imports: [CommonModule, MatCardModule,MatCheckboxModule, ReactiveFormsModule, MatButtonModule, MatIconModule, MatTableModule, MatInputModule, MatDialogModule],
   templateUrl: './group-asset-create-dialog.html',
-  styleUrl: './group-asset-create-dialog.scss'
+  styleUrl: './group-asset-create-dialog.scss',
+  standalone: true
 })
 export class GroupAssetCreateDialog {
    form: FormGroup;

@@ -23,7 +23,8 @@ import { SearchInput } from 'src/app/shared/components/search-input/search-input
   selector: 'app-asset-type-list',
   imports: [CommonModule, SearchInput, MatCardModule, ReactiveFormsModule, MatButtonModule, MatIconModule, MatTableModule, MatInputModule, MatDialogModule , SharedModule , TranslateModule , PaginatorComponent ],
   templateUrl: './asset-type-list.html',
-  styleUrl: './asset-type-list.scss'
+  styleUrl: './asset-type-list.scss',
+  standalone: true
 })
 export class AssetTypeList implements OnInit, OnDestroy {
    displayedColumns = ['stt', 'maLoai', 'tenLoai', 'trangThai', 'thaotac'];

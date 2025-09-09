@@ -18,7 +18,8 @@ import { ReasonAssetService } from 'src/app/management/Services/assetReason-mana
   selector: 'app-asset-reason-create-dialog',
   imports: [CommonModule, ReactiveFormsModule, MatCardModule, MatCheckboxModule, MatTableModule, MatButtonModule, MatIconModule, MatDialogModule, MatChipsModule , MatSelectModule , MatFormFieldModule,MatInputModule],
   templateUrl: './asset-reason-create-dialog.html',
-  styleUrl: './asset-reason-create-dialog.scss'
+  styleUrl: './asset-reason-create-dialog.scss',
+  standalone: true
 })
 export class AssetReasonCreateDialog {
    form: FormGroup;

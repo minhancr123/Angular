@@ -1,48 +1,89 @@
-<h2 class="mb-4">SỬA ĐƠN VỊ BẢO HIỂM</h2>
-
-<form [formGroup]="form" novalidate class="p-3">
-  <div class="row mb-3">
-    <div class="col-md-6">
-      <mat-form-field appearance="outline" class="w-100 bg-light rounded px-2">
-        <mat-label>Tên đơn vị*</mat-label>
-        <input matInput formControlName="tenDonVi" required />
-        <mat-error *ngIf="form.get('tenDonVi')?.hasError('required')">Không được để trống</mat-error>
-      </mat-form-field>
+<div class="p-4">
+  <!-- Header -->
+  <div class="d-flex align-items-center mb-4 pb-3 border-bottom">
+    <div class="bg-warning rounded-circle p-2 me-3">
+      <mat-icon class="text-white">edit</mat-icon>
     </div>
-    <div class="col-md-6">
-      <mat-form-field appearance="outline" class="w-100 bg-light rounded px-2">
-        <mat-label>Địa chỉ</mat-label>
-        <input matInput formControlName="diaChi" />
-      </mat-form-field>
-    </div>
+    <h4 class="mb-0 fw-bold text-warning">Sửa đơn vị bảo hiểm</h4>
   </div>
 
-  <div class="row mb-3">
-    <div class="col-md-6">
-      <mat-form-field appearance="outline" class="w-100 bg-light rounded px-2">
-        <mat-label>Số điện thoại</mat-label>
-        <input matInput formControlName="soDT" />
-      </mat-form-field>
-    </div>
-    <div class="col-md-6">
-      <mat-form-field appearance="outline" class="w-100 bg-light rounded px-2">
-        <mat-label>Người liên hệ</mat-label>
-        <input matInput formControlName="nguoiLienHe" />
-      </mat-form-field>
-    </div>
-  </div>
+  <!-- Form Content -->
+  <form [formGroup]="form" novalidate>
+    
+    <!-- Form Fields -->
+    <div class="row g-3">
+      
+      <!-- Row 1: Tên đơn vị và Địa chỉ -->
+      <div class="col-md-6 col-12">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Tên đơn vị</mat-label>
+          <input matInput formControlName="tenDonVi" required 
+                 placeholder="Nhập tên công ty bảo hiểm" />
+          <mat-icon matSuffix color="warn">business</mat-icon>
+          <mat-error *ngIf="form.get('tenDonVi')?.hasError('required')">
+            Vui lòng nhập tên đơn vị
+          </mat-error>
+        </mat-form-field>
+      </div>
 
-  <div class="row mb-4">
-    <div class="col-md-12">
-      <mat-form-field appearance="outline" class="w-100 bg-light rounded px-2">
-        <mat-label>Ghi chú</mat-label>
-        <textarea matInput formControlName="ghiChu" rows="3"></textarea>
-      </mat-form-field>
-    </div>
-  </div>
+      <div class="col-md-6 col-12">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Địa chỉ</mat-label>
+          <input matInput formControlName="diaChi" 
+                 placeholder="Nhập địa chỉ trụ sở chính" />
+          <mat-icon matSuffix color="warn">location_on</mat-icon>
+        </mat-form-field>
+      </div>
 
-  <div class="d-flex justify-content-end gap-2">
-    <button mat-stroked-button color="warn" (click)="close()">Huỷ</button>
-    <button mat-flat-button color="primary" (click)="submit()" [disabled]="form.invalid">Cập nhật</button>
-  </div>
-</form>
+      <!-- Row 2: Số điện thoại và Người liên hệ -->
+      <div class="col-md-6 col-12">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Số điện thoại</mat-label>
+          <input matInput formControlName="soDT" 
+                 placeholder="Nhập số điện thoại liên hệ" 
+                 type="tel" />
+          <mat-icon matSuffix color="warn">phone</mat-icon>
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-6 col-12">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Người liên hệ</mat-label>
+          <input matInput formControlName="nguoiLienHe" 
+                 placeholder="Nhập tên người phụ trách" />
+          <mat-icon matSuffix color="warn">person</mat-icon>
+        </mat-form-field>
+      </div>
+
+      <!-- Row 3: Ghi chú -->
+      <div class="col-12">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Ghi chú</mat-label>
+          <textarea matInput formControlName="ghiChu" rows="3"
+                   placeholder="Nhập thông tin bổ sung về đối tác (không bắt buộc)"></textarea>
+          <mat-icon matSuffix color="warn">note_add</mat-icon>
+        </mat-form-field>
+      </div>
+
+    </div>
+
+    <!-- Footer Actions -->
+    <div class="mt-4 pt-3 border-top">
+      <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+        <!-- Cancel Button -->
+        <button mat-stroked-button color="warn" (click)="close()" class="px-4">
+          <mat-icon class="me-1">close</mat-icon>
+          Hủy bỏ
+        </button>
+        
+        <!-- Update Button -->
+        <button mat-flat-button color="warn" 
+                (click)="submit()" [disabled]="form.invalid" class="px-4">
+          <mat-icon class="me-1">update</mat-icon>
+          Cập nhật thông tin
+        </button>
+      </div>
+    </div>
+
+  </form>
+</div>

@@ -8,7 +8,8 @@ import { MatIconModule } from '@angular/material/icon';
   selector: 'app-sort-icon',
   templateUrl: './sort-icon.component.html',
   styleUrls: ['./sort-icon.component.scss'],
-  imports: [InlineSvgComponent , CommonModule , MatIconModule]
+  imports: [ CommonModule , MatIconModule],
+  standalone: true
 })
 export class SortIconComponent implements OnInit, OnChanges {
   @Input() column: string;

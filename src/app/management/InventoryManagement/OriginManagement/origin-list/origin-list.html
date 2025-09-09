@@ -1,11 +1,11 @@
-<mat-card class="mat-elevation-z4 card">
+<mat-card class="mat-elevation-z4 card inventory-table-responsive inventory-table-responsive">
   
   <!-- Header -->
-  <mat-card-header class="card-header d-flex justify-content-between align-items-center">
+  <mat-card-header class="card-header d-flex justify-content-between align-items-center flex-wrap inventory-card-header inventory-card-header">
 
      <h5 class="text-uppercase mb-0 me-auto">Xuất xứ</h5>
-      <div class="d-flex gap-2 align-items-center">
-      <button mat-raised-button color="primary" (click)="onSubmit()" *ngIf="xuatXuService.Visible">
+      <div class="d-flex gap-2 flex-wrap align-items-center flex-wrap">
+      <button mat-raised-button color="primary" (click)="onSubmit()" *ngIf="xuatXuService.Visible" class="btn-responsive">
         <mat-icon>add</mat-icon>
         Thêm mới
       </button>
@@ -27,10 +27,10 @@
     </div>
   </mat-card-header>
 
-  <mat-card-content>
+  <mat-card-content class="inventory-card-content">
     <!-- Search & Bulk Action -->
-    <div class="row mb-3 align-items-center">
-      <div class="col-md-6">
+    <div class="row mb-3 align-items-center inventory-search-controls">
+      <div class="col-md-6 col-12 col-12">
         <mat-form-field appearance="outline" class="w-100">
           <mat-label>Tìm kiếm</mat-label>
           <input matInput placeholder="Tìm kiếm tất cả nội dung" [formControl]="searchControl" />
@@ -39,30 +39,32 @@
           </button>
         </mat-form-field>
       </div>
-      <div class="col-md-6 text-end">
-        <button mat-raised-button color="warn" [disabled]="!selectedItems.length"  *ngIf="xuatXuService.Visible" (click)="deleteSelected()">
-          <mat-icon>delete</mat-icon>
-          Xóa xuất xứ
-        </button>
-        <span class="ms-2 text-muted">Số lượng đã chọn: {{ selectedItems.length }}</span>
+      <div class="col-md-6 col-12 col-12 text-end">
+        <div class="d-flex flex-column flex-sm-row gap-2 align-items-center justify-content-end">
+          <button mat-raised-button color="warn" [disabled]="!selectedItems.length"  *ngIf="xuatXuService.Visible" (click)="deleteSelected()" class="btn-responsive">
+            <mat-icon>delete</mat-icon>
+            Xóa xuất xứ
+          </button>
+          <span class="text-muted small">Số lượng đã chọn: {{ selectedItems.length }}</span>
+        </div>
       </div>
     </div>
 
     <div class="table-responsive">
       
       <!-- Table -->
-      <table mat-table [dataSource]="dataSource" class=" table w-100">
+      <table table-sm mat-table table-sm [dataSource]="dataSource" class="table table-sm table-sm w-100">
         
         <!-- Checkbox Column -->
         <ng-container matColumnDef="select">
-          <th mat-header-cell *matHeaderCellDef>
+          <th mat-header-cell class="text-nowrap" *matHeaderCellDef class="text-nowrap">
             <mat-checkbox
             (change)="toggleAllRows($event)"
             [checked]="selection.hasValue() && isAllSelected()"
             [indeterminate]="selection.hasValue() && !isAllSelected()">
           </mat-checkbox>
         </th>
-        <td mat-cell *matCellDef="let row">
+        <td mat-cell class="text-break" *matCellDef="let row">
           <mat-checkbox
           (click)="$event.stopPropagation()"
           (change)="toggleSelection(row)"
@@ -73,13 +75,13 @@
         
         <!-- STT Column -->
         <ng-container matColumnDef="stt">
-          <th mat-header-cell *matHeaderCellDef>STT</th>
-          <td mat-cell *matCellDef="let element; let i = index">{{ i + 1 }}</td>
+          <th mat-header-cell class="text-nowrap" *matHeaderCellDef class="text-nowrap">STT</th>
+          <td mat-cell class="text-break" *matCellDef="let element; let i = index">{{ i + 1 }}</td>
         </ng-container>
         
         <!-- Tên xuất xứ -->
         <ng-container matColumnDef="tenXuatXu">
-          <th mat-header-cell *matHeaderCellDef>
+          <th mat-header-cell class="text-nowrap" *matHeaderCellDef class="text-nowrap">
             <span class="d-inline-flex align-items-center">
               Tên xuất xứ
               <app-sort-icon
@@ -90,30 +92,35 @@
             </app-sort-icon>
           </span>
         </th>
-        <td mat-cell *matCellDef="let element">{{ element.TenXuatXu }}</td>
+        <td mat-cell class="text-break" *matCellDef="let element" class="text-break">{{ element.TenXuatXu }}</td>
       </ng-container>
       
       <!-- Thao tác -->
       <ng-container matColumnDef="thaoTac">
-        <th mat-header-cell *matHeaderCellDef>Thao tác</th>
-          <td mat-cell *matCellDef="let element">
-            <button mat-icon-button color="primary" (click)="onEdit(element)" *ngIf="xuatXuService.Visible">
-              <mat-icon>edit</mat-icon>
-            </button>
-            <button mat-icon-button color="warn" (click)="onDelete(element.IdXuatXu)" *ngIf="xuatXuService.Visible">
-              <mat-icon>delete</mat-icon>
-            </button>
+        <th mat-header-cell class="text-nowrap" *matHeaderCellDef class="text-nowrap">Thao tác</th>
+          <td mat-cell class="text-break" *matCellDef="let element">
+            <div class="btn-group btn-group-sm d-flex flex-column flex-sm-row gap-1">
+              <button mat-icon-button color="primary" (click)="onEdit(element)" *ngIf="xuatXuService.Visible" 
+                      class="btn-sm" matTooltip="Chỉnh sửa" matTooltip="Chỉnh sửa">
+                <mat-icon class="small-icon">edit</mat-icon>
+              </button>
+              <button mat-icon-button color="warn" (click)="onDelete(element.IdXuatXu)" *ngIf="xuatXuService.Visible" 
+                      class="btn-sm" matTooltip="Xóa" matTooltip="Xóa">
+                <mat-icon class="small-icon">delete</mat-icon>
+              </button>
+            </div>
           </td>
         </ng-container>
         
         <!-- Table Rows -->
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="table-row-hover"></tr>
+
       </table>
     </div>
 
     <!-- Paginator -->
-    <div class="mt-3">
+    <div class="mt-3 inventory-pagination-responsive inventory-pagination-responsive">
       <app-paginator
         [paginator]="paginator"
         [isLoading]="isLoading"

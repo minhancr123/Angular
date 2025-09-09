@@ -14,7 +14,8 @@ import { MatDialogRef } from '@angular/material/dialog';
   selector: 'app-item-import',
   imports: [MatButtonModule, MatInputModule , MatIconModule , MatFormFieldModule],
   templateUrl: './item-import.html',
-  styleUrl: './item-import.scss'
+  styleUrl: './item-import.scss',
+  standalone: true
 })
 export class ItemImport {
   selectedFile: File | null = null;

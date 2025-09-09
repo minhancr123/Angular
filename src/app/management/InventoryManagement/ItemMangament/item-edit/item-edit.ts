@@ -18,7 +18,8 @@ import { MatCardHeader, MatCardModule } from "@angular/material/card";
   templateUrl: './item-edit.html',
   styleUrls: ['./item-edit.scss'],
   imports: [ReactiveFormsModule, MatInputModule, MatButtonModule, MatSelectModule, MatFormFieldModule, CommonModule, MatCheckboxModule, MatCardHeader , MatCardModule],
-  providers: [DVTService, LoaiMatHangService]
+  providers: [DVTService, LoaiMatHangService],
+  standalone: true
 })
 export class ItemEdit implements OnInit {
   form: FormGroup;

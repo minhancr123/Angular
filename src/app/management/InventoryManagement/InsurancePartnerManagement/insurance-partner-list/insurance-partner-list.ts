@@ -21,7 +21,8 @@ import { PaginatorComponent } from 'src/app/_metronic/shared/crud-table/componen
   selector: 'app-insurance-partner-list',
   imports: [CommonModule, ReactiveFormsModule, MatButtonModule, MatIconModule, MatTableModule, MatInputModule, MatDialogModule, TranslateModule, SharedModule , PaginatorComponent],
   templateUrl: './insurance-partner-list.html',
-  styleUrl: './insurance-partner-list.scss'
+  styleUrl: './insurance-partner-list.scss',
+  standalone: true
 })
 export class InsurancePartnerList {
    displayedColumns = ['stt', 'tenDonVi', 'diaChi', 'soDT', 'nguoiLienHe', 'ghiChu', 'thaotac'];

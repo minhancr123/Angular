@@ -23,7 +23,8 @@ import { SearchInput } from 'src/app/shared/components/search-input/search-input
   selector: 'app-group-asset-list',
   imports: [CommonModule, SearchInput, SharedModule , TranslateModule, MatCardModule, ReactiveFormsModule, MatButtonModule, MatIconModule, MatTableModule, MatInputModule, MatDialogModule , PaginatorComponent],
   templateUrl: './group-asset-list.html',
-  styleUrl: './group-asset-list.scss'
+  styleUrl: './group-asset-list.scss',
+  standalone: true
 })
 export class GroupAssetList implements OnInit , OnDestroy {
      displayedColumns = ['stt', 'maNhom', 'tenNhom', 'trangThai', 'thaotac'];

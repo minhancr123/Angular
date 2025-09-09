@@ -22,7 +22,8 @@ import { SearchInput } from 'src/app/shared/components/search-input/search-input
   selector: 'app-asset-reason-list',
   imports: [CommonModule, SearchInput, MatCardModule, SharedModule , TranslateModule, MatTableModule, MatButtonModule, MatIconModule, MatDialogModule, MatChipsModule , PaginatorComponent],
   templateUrl: './asset-reason-list.html',
-  styleUrl: './asset-reason-list.scss'
+  styleUrl: './asset-reason-list.scss',
+  standalone: true
 })
 export class AssetReasonList implements OnInit, OnDestroy {
   displayedColumns = ['stt', 'maTangGiam', 'tenTangGiam', 'loaiTangGiam', 'actions'];

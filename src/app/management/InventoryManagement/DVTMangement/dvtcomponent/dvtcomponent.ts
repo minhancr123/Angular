@@ -38,7 +38,8 @@ import { PaginatorComponent } from 'src/app/_metronic/shared/crud-table/componen
   TranslateModule,
   PaginatorComponent,
   MatHeaderCell
-  ]
+  ],
+  standalone: true
 })
 export class DVTComponent implements OnInit {
   dvtList: DVTModel[] = [];
@@ -56,7 +57,7 @@ export class DVTComponent implements OnInit {
     public dvtService: DVTService,
     private fb: FormBuilder,
    private layoutUtilsService: LayoutUtilsService,
-   private dialog : MatDialog
+   private dialog : MatDialog,
     // private toastr: ToastrService
   ) {
     this.grouping = this.dvtService.grouping;
@@ -121,17 +122,26 @@ export class DVTComponent implements OnInit {
   }
 
   onDelete(id: number): void {
-    if (confirm('Bạn có chắc chắn muốn xóa?')) {
-      this.dvtService.delete(id).subscribe({
-        next: () => {
-          this.layoutUtilsService.showInfo('Xóa thành công');
-          this.loadData();
-        },
-        error: () => {
-          this.layoutUtilsService.showError('Lỗi khi xóa');
-        }
-      });
-    }
+      const item = this.dataSource.data.find(x => x.IdDVT === id);
+      const title = 'Xác nhận xoá';
+  const description = `Bạn có chắc muốn xoá đơn vị tính "${item?.TenDVT || 'này'}" không?`;
+  const waitDesciption = 'Đang xoá dữ liệu...';
+  const deleteMessage = `"${item?.TenDVT || 'Item'}" đã được xoá thành công`;
+
+  const dialogRef = this.layoutUtilsService.deleteElement(title, description, waitDesciption, 'Xoá');
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.dvtService.delete(id).subscribe({
+          next: () => {
+            this.layoutUtilsService.showInfo('Xóa thành công');
+            this.loadData();
+          },
+          error: () => {
+            this.layoutUtilsService.showError('Lỗi khi xóa');
+          }
+        });
+      }
+    });
   }
 
   resetForm(): void {

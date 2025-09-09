@@ -18,7 +18,8 @@ import { XuatXuService } from 'src/app/management/Services/origin-management.ser
     MatFormFieldModule,
     MatInputModule],
   templateUrl: './origin-create-dialog.html',
-  styleUrl: './origin-create-dialog.scss'
+  styleUrl: './origin-create-dialog.scss',
+  standalone: true
 })
 export class OriginCreateDialog {
 createForm: FormGroup;

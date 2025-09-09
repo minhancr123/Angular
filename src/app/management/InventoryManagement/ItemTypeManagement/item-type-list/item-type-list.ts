@@ -25,6 +25,7 @@ import { ItemImport } from '../../ItemMangament/item-import/item-import';
     imports: [CommonModule , SharedModule , MatCardModule, TranslateModule, MatIconModule , PaginatorComponent , MatTableModule ,MatFormFieldModule , MatButtonModule,MatDialogModule , ReactiveFormsModule , MatInputModule],
     templateUrl: './item-type-list.html',
     styleUrl: './item-type-list.scss',
+    standalone: true
   })
   export class ItemTypeList implements OnInit, OnDestroy {
     showFilter : boolean = false;

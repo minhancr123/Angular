@@ -24,7 +24,8 @@ import { LoaiMatHangService } from 'src/app/management/Services/itemtype-managem
     MatIconModule,MatCardModule, MatButtonToggleModule, ReactiveFormsModule, MatSelectModule, MatOptionModule, MatRadioModule],
   templateUrl: './add-item.html',
   styleUrl: './add-item.scss',
-  providers: [DVTService, LoaiMatHangService, MatHangService]
+  providers: [DVTService, LoaiMatHangService, MatHangService],
+  standalone: true
 })
 export class AddItem {
 form!: FormGroup;

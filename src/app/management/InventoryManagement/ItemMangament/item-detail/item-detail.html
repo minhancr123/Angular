@@ -12,7 +12,7 @@
       <mat-tab label="Thông tin cơ bản">
         <div class="tab-content p-3">
           <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-6 col-12">
               <div class="info-group mb-3">
                 <label class="info-label">Mã hàng:</label>
                 <span class="info-value">{{ item.MaHang }}</span>
@@ -34,7 +34,7 @@
                 <span class="info-value">{{ item.TenOnSite || 'Không có' }}</span>
               </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 col-12">
               <div class="info-group mb-3">
                 <label class="info-label">Giá mua:</label>
                 <span class="info-value text-success">{{ item.GiaMua | currency:'VND':'symbol':'1.0-0' }}</span>
@@ -68,7 +68,7 @@
       <mat-tab label="Thông tin kỹ thuật">
         <div class="tab-content p-3">
           <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-6 col-12">
               <div class="info-group mb-3">
                 <label class="info-label">Quy đổi ĐVT cấp 2:</label>
                 <span class="info-value">{{ item.QuyDoiDVTCap2 || 0 }}</span>
@@ -86,7 +86,7 @@
                 <span class="info-value">{{ item.ThongSo || 'Không có' }}</span>
               </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 col-12">
               <div class="info-group mb-3">
                 <label class="info-label">Tồn tối thiểu:</label>
                 <span class="info-value">{{ item.LowerLimit || 0 }}</span>
@@ -120,7 +120,7 @@
       <mat-tab label="Thông tin tài sản">
         <div class="tab-content p-3">
           <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-6 col-12">
               <div class="info-group mb-3">
                 <label class="info-label">Là tài sản:</label>
                 <span class="info-value">
@@ -138,7 +138,7 @@
                 <span class="info-value">{{ item.SoKyTinhKhauHaoToiDa || 0 }}</span>
               </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 col-12">
               <div class="info-group mb-3">
                 <label class="info-label">Số năm đề nghị:</label>
                 <span class="info-value">{{ item.SoNamDeNghi || 'Không có' }}</span>
@@ -177,7 +177,7 @@
       <mat-tab label="Thông tin hệ thống">
         <div class="tab-content p-3">
           <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-6 col-12">
               <div class="info-group mb-3">
                 <label class="info-label">Ngày tạo:</label>
                 <span class="info-value">{{ item.CreatedDate | date:'dd/MM/yyyy HH:mm' }}</span>
@@ -187,7 +187,7 @@
                 <span class="info-value">{{ item.CreatedBy || 'Không xác định' }}</span>
               </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 col-12">
               <div class="info-group mb-3">
                 <label class="info-label">Ngày sửa đổi:</label>
                 <span class="info-value">{{ item.ModifiedDate ? (item.ModifiedDate | date:'dd/MM/yyyy HH:mm') : 'Chưa sửa đổi' }}</span>

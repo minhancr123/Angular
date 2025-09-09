@@ -16,7 +16,8 @@ import { GroupAssetService } from 'src/app/management/Services/groupAsset-manage
   selector: 'app-group-asset-edit-dialog',
   imports: [CommonModule, MatCardModule,MatCheckboxModule, ReactiveFormsModule, MatButtonModule, MatIconModule, MatTableModule, MatInputModule, MatDialogModule],
   templateUrl: './group-asset-edit-dialog.html',
-  styleUrl: './group-asset-edit-dialog.scss'
+  styleUrl: './group-asset-edit-dialog.scss',
+  standalone: true
 })
 export class GroupAssetEditDialog {
   form: FormGroup;
